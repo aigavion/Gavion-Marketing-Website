@@ -269,22 +269,19 @@
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #111; }
         ::-webkit-scrollbar-thumb { background: #ff6b00; border-radius: 4px; }
-         ::-webkit-scrollbar-thumb:hover { background: #e65c00; }
+        ::-webkit-scrollbar-thumb:hover { background: #e65c00; }
 
-         /* Plain black background - hide decorative effects */
-         .grid-overlay,
-         .bg-gradient,
-         .particle {
-             display: none !important;
-         }
-
-         /* Glass dark */
+        /* Glass dark */
         .glass-dark {
             background: rgba(26, 26, 26, 0.8);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 107, 0, 0.2);
         }
+        .grid-overlay,
+        .bg-gradient,
+        .particle { display: none !important; }
+
     </style>
 </head>
     <body class="text-white antialiased selection:bg-brand-500 selection:text-white">
@@ -297,11 +294,11 @@
         <div class="particle particle-3"></div>
 
         <!-- Navigation -->
-    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-0 bg-transparent border-b border-white/5 backdrop-blur-sm">
+    <nav id="navbar" class="...py-2 bg-transparent border-b border-white/5 backdrop-blur-sm">
         <div class="container mx-auto px-6 max-w-7xl">
             <div class="flex items-center justify-between">
                 <a href="#" class="relative group" aria-label="Gavion Home">
-                      <img src="GAVION_logo_transparent_4096w.png" alt="Gavion" width="320" height="100" class="h-5 w-auto transition-transform group-hover:scale-105">
+                     <img src="GAVION_logo_transparent_4096w.png" alt="Gavion" width="320" height="100" class="h-24 w-auto transition-transform group-hover:scale-105">
                 </a>
                 
                  <!-- Desktop Menu -->
@@ -346,8 +343,9 @@
         <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-brand-500/5 rounded-full blur-3xl animate-float" style="animation-delay: 2s;"></div>
         
         <div class="container mx-auto px-6 max-w-7xl relative z-10">
-            <div class="grid lg:grid-cols-2 gap-16 items-center">
-                <div class="text-center lg:text-left animate-fade-up">
+            <div class="grid lg:grid-cols-2 gap-4 items-center">
+                <!-- Text Content (Left) -->
+                <div class="flex flex-col justify-center min-h-[500px] text-center lg:text-left animate-fade-up">
                      <span class="inline-block px-4 py-1.5 rounded-full bg-brand-500/20 text-brand-500 text-xs font-semibold uppercase tracking-wide mb-6" data-fr="hero-badge">AI Integration Agency</span>
                     <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white mb-6">
                         <span data-fr="hero-title">Automate your business with <span class="text-brand-500">AI</span></span>
@@ -363,12 +361,12 @@
                         <a href="#process" class="inline-flex items-center justify-center px-8 py-4 bg-white/10 backdrop-blur text-white border border-white/20 rounded-full font-semibold hover:bg-white/20 hover:shadow-soft transition-all">
                             <span data-fr="hero-cta-secondary">See How It Works</span>
                         </a>
-
+                    </div>
                 </div>
                 
-                <!-- Animated Chat Demo -->
+                <!-- Animated Chat Demo (Right) -->
                 <div class="relative animate-fade-up" style="animation-delay: 0.2s;">
-                     <div class="glass-dark rounded-2xl p-1 shadow-soft max-w-md h-[500px] ml-auto">
+                    <div class="glass-dark rounded-2xl p-1 shadow-soft max-w-md h-[500px] ml-auto mr-2">
                         <div class="bg-dark-800/80 backdrop-blur rounded-xl overflow-hidden">
                             <div class="flex items-center justify-between px-4 py-3 bg-dark-900/50 border-b border-white/5">
                                 <div class="flex items-center gap-2">
@@ -402,6 +400,8 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
             </div>
         </div>
      </section>
@@ -752,7 +752,7 @@
                 <p class="text-lg text-white/70" data-fr="contact-subtitle">Ready to automate? Book a free 30-minute consultation. No sales pitch, just a conversation about your needs.</p>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-16 max-w-5xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-4 max-w-5xl mx-auto">
                 <!-- Contact Info -->
                 <div class="space-y-8 reveal" style="animation-delay: 0.1s;">
                     <div>
