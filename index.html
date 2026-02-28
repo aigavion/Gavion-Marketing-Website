@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Gavion — AI Integration Agency. Automate lead qualification, appointments, and customer support with custom AI solutions. Bilingual EN/FR.">
+    <title>Gavion | AI Integration for Modern Businesses</title>
+    <link rel="icon" href="FULLLOGO-GAVION.png" type="image/png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        // Black, white, orange scheme
+                        brand: {
+                            400: '#ff6b00', // bright orange
+                            500: '#ff6b00', // primary
+                            600: '#e65c00', // hover dark
+                        },
+                        dark: {
+                            900: '#000000',
+                            800: '#0a0a0a',
+                            700: '#111111',
+                            600: '#1a1a1a',
+                        },
+                        light: {
+                            50: '#ffffff',
+                            100: '#f5f5f5',
+                            200: '#e5e5e5',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'glow': '0 0 30px -5px rgba(255, 107, 0, 0.5)',
+                        'soft': '0 8px 32px -8px rgba(0,0,0,0.5)',
+                    },
+                    animation: {
+                        'float': 'float 8s ease-in-out infinite',
+                        'fade-up': 'fadeUp 0.8s ease-out forwards',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-15px)' },
+                        },
+                        fadeUp: {
+                            '0%': { opacity: 0, transform: 'translateY(30px)' },
+                            '100%': { opacity: 1, transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+     <style>
+         html {
+             background: #000000;
+         }
+         
+         body { 
+             font-family: 'Inter', sans-serif; 
+             color: #fff;
+             position: relative;
+             overflow-x: hidden;
+         }
+         
+         /* Animated gradient background */
+         .bg-gradient {
+             position: fixed;
+             top: 0;
+             left: 0;
+             width: 100%;
+             height: 100%;
+             z-index: -1;
+              background: radial-gradient(ellipse at 20% 20%, rgba(255, 107, 0, 0.25) 0%, transparent 50%),
+                          radial-gradient(ellipse at 80% 80%, rgba(139, 92, 246, 0.2) 0%, transparent 50%),
+                          radial-gradient(ellipse at 50% 50%, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+             animation: gradientShift 15s ease infinite;
+         }
+         
+         @keyframes gradientShift {
+             0%, 100% { opacity: 1; transform: scale(1); }
+             50% { opacity: 0.8; transform: scale(1.05); }
+         }
+         
+         /* Floating particles */
+         .particle {
+             position: fixed;
+             border-radius: 50%;
+             pointer-events: none;
+             z-index: -1;
+         }
+         
+         .particle-1 {
+             width: 300px;
+             height: 300px;
+             background: radial-gradient(circle, rgba(255, 107, 0, 0.25) 0%, transparent 70%);
+             top: 10%;
+             left: 10%;
+             animation: float1 20s ease-in-out infinite;
+         }
+         
+         .particle-2 {
+             width: 200px;
+             height: 200px;
+             background: radial-gradient(circle, rgba(139, 92, 246, 0.2) 0%, transparent 70%);
+             top: 60%;
+             right: 15%;
+             animation: float2 25s ease-in-out infinite;
+         }
+         
+         .particle-3 {
+             width: 150px;
+             height: 150px;
+             background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+             bottom: 20%;
+             left: 30%;
+             animation: float3 18s ease-in-out infinite;
+         }
+         
+         @keyframes float1 {
+             0%, 100% { transform: translate(0, 0) rotate(0deg); }
+             50% { transform: translate(30px, -30px) rotate(180deg); }
+         }
+         
+         @keyframes float2 {
+             0%, 100% { transform: translate(0, 0) scale(1); }
+             50% { transform: translate(-20px, 20px) scale(1.1); }
+         }
+         
+         @keyframes float3 {
+             0%, 100% { transform: translate(0, 0); }
+             50% { transform: translate(15px, -15px); }
+         }
+         
+         /* Subtle grid pattern overlay */
+         .grid-overlay {
+             position: fixed;
+             top: 0;
+             left: 0;
+             width: 100%;
+             height: 100%;
+             z-index: -2;
+             background-image: 
+                 linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                 linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+             background-size: 50px 50px;
+             pointer-events: none;
+         }
+         
+         html { scroll-behavior: smooth; }
+
+         /* Enhanced reveal animations */
+         .reveal {
+             opacity: 0;
+             transform: translateY(60px);
+             transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+         }
+         .reveal.active {
+             opacity: 1;
+             transform: translateY(0);
+         }
+
+         /* Staggered reveal for grid items */
+         .reveal-stagger > * {
+             opacity: 0;
+             transform: translateY(40px);
+             transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+         }
+         .reveal-stagger.active > *:nth-child(1) { transition-delay: 0.1s; opacity: 1; transform: translateY(0); }
+         .reveal-stagger.active > *:nth-child(2) { transition-delay: 0.2s; opacity: 1; transform: translateY(0); }
+         .reveal-stagger.active > *:nth-child(3) { transition-delay: 0.3s; opacity: 1; transform: translateY(0); }
+         .reveal-stagger.active > *:nth-child(4) { transition-delay: 0.4s; opacity: 1; transform: translateY(0); }
+         .reveal-stagger.active > *:nth-child(5) { transition-delay: 0.5s; opacity: 1; transform: translateY(0); }
+         .reveal-stagger.active > *:nth-child(6) { transition-delay: 0.6s; opacity: 1; transform: translateY(0); }
+
+         /* Slide from left */
+         .reveal-left {
+             opacity: 0;
+             transform: translateX(-60px);
+             transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+         }
+         .reveal-left.active {
+             opacity: 1;
+             transform: translateX(0);
+         }
+
+         /* Slide from right */
+         .reveal-right {
+             opacity: 0;
+             transform: translateX(60px);
+             transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+         }
+         .reveal-right.active {
+             opacity: 1;
+             transform: translateX(0);
+         }
+
+         /* Scale in */
+         .reveal-scale {
+             opacity: 0;
+             transform: scale(0.9);
+             transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+         }
+         .reveal-scale.active {
+             opacity: 1;
+             transform: scale(1);
+         }
+
+         /* Diagonal clip reveal */
+         .diagonal-reveal {
+             position: relative;
+             overflow: hidden;
+         }
+         .diagonal-reveal::before {
+             content: '';
+             position: absolute;
+             top: 0;
+             left: 0;
+             width: 100%;
+             height: 100%;
+             background: linear-gradient(135deg, transparent 0%, rgba(255, 107, 0, 0.1) 50%, transparent 100%);
+             transform: translateX(-100%);
+             transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+         }
+         .diagonal-reveal.active::before {
+             transform: translateX(100%);
+         }
+
+         /* Section divider line animation */
+         .section-divider {
+             position: relative;
+             height: 4px;
+             background: linear-gradient(90deg, transparent, #ff6b00, transparent);
+             margin: 0 auto;
+             width: 0;
+             transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+         }
+         .section-divider.active {
+             width: 200px;
+         }
+
+        .pulse-dot {
+            box-shadow: 0 0 0 0 rgba(255, 107, 0, 0.7);
+            animation: pulse-orange 2s infinite;
+        }
+        @keyframes pulse-orange {
+            0% { box-shadow: 0 0 0 0 rgba(255, 107, 0, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 107, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 107, 0, 0); }
+        }
+
+        .magnetic-btn {
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .magnetic-btn:hover { transform: translateY(-2px) scale(1.02); }
+
+        .pricing-card {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .pricing-card:hover { transform: translateY(-8px); }
+        .pricing-card.featured { border: 2px solid #ff6b00; }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #111; }
+        ::-webkit-scrollbar-thumb { background: #ff6b00; border-radius: 4px; }
+         ::-webkit-scrollbar-thumb:hover { background: #e65c00; }
+
+         /* Plain black background - hide decorative effects */
+         .grid-overlay,
+         .bg-gradient,
+         .particle {
+             display: none !important;
+         }
+
+         /* Glass dark */
+        .glass-dark {
+            background: rgba(26, 26, 26, 0.8);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 107, 0, 0.2);
+        }
+    </style>
+</head>
+    <body class="text-white antialiased selection:bg-brand-500 selection:text-white">
+        
+        <!-- Background Effects -->
+        <div class="grid-overlay"></div>
+        <div class="bg-gradient"></div>
+        <div class="particle particle-1"></div>
+        <div class="particle particle-2"></div>
+        <div class="particle particle-3"></div>
+
+        <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-0 bg-transparent border-b border-white/5 backdrop-blur-sm">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="flex items-center justify-between">
+                <a href="#" class="relative group" aria-label="Gavion Home">
+                      <img src="GAVION_logo_transparent_4096w.png" alt="Gavion" width="320" height="100" class="h-5 w-auto transition-transform group-hover:scale-105">
+                </a>
+                
+                 <!-- Desktop Menu -->
+                 <div class="hidden md:flex items-center space-x-8">
+                     <a href="#services" class="text-sm font-medium text-white/70 hover:text-white transition-colors relative group" data-fr="nav-services">
+                         Services
+                         <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-500 transition-all group-hover:w-full"></span>
+                     </a>
+                     <a href="#why-us" class="text-sm font-medium text-white/70 hover:text-white transition-colors relative group" data-fr="nav-why">
+                         Why Us
+                         <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-500 transition-all group-hover:w-full"></span>
+                     </a>
+                     <a href="#pricing" class="text-sm font-medium text-white/70 hover:text-white transition-colors relative group" data-fr="nav-pricing">
+                         Pricing
+                         <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-500 transition-all group-hover:w-full"></span>
+                     </a>
+                     <a href="#testimonials" class="text-sm font-medium text-white/70 hover:text-white transition-colors relative group" data-fr="nav-testimonials">
+                         Testimonials
+                         <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-500 transition-all group-hover:w-full"></span>
+                     </a>
+                     <a href="#contact" class="text-sm font-medium text-white/70 hover:text-white transition-colors relative group" data-fr="nav-contact">
+                         Contact
+                         <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-500 transition-all group-hover:w-full"></span>
+                     </a>
+                  </div>
+                 
+                 <div class="flex items-center space-x-3">
+                     <button id="langToggle" class="px-4 py-2 text-sm font-medium rounded-lg border border-white/20 hover:border-brand-500 hover:text-brand-500 transition-all" aria-label="Toggle language">Français</button>
+   
+                      <a href="#contact" class="magnetic-btn px-5 py-2 bg-brand-500 text-white rounded-full text-sm font-semibold shadow-glow hover:bg-brand-600 transition-all" data-fr="nav-cta">Get Started</a>
+                 </div>
+            </div>
+         </div>
+     </nav>
+ 
+     <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center overflow-hidden pt-20">
+        <!-- Dark overlay for readability -->
+        <div class="absolute inset-0 bg-dark-900/50 backdrop-blur-sm"></div>
+        <!-- Ambient glow orbs - orange -->
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-500/10 rounded-full blur-3xl animate-float"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-brand-500/5 rounded-full blur-3xl animate-float" style="animation-delay: 2s;"></div>
+        
+        <div class="container mx-auto px-6 max-w-7xl relative z-10">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="text-center lg:text-left animate-fade-up">
+                     <span class="inline-block px-4 py-1.5 rounded-full bg-brand-500/20 text-brand-500 text-xs font-semibold uppercase tracking-wide mb-6" data-fr="hero-badge">AI Integration Agency</span>
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white mb-6">
+                        <span data-fr="hero-title">Automate your business with <span class="text-brand-500">AI</span></span>
+                    </h1>
+                    <p class="text-lg md:text-xl text-white/70 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed" data-fr="hero-subtitle">
+                        Gavion helps small businesses qualify leads, save time, and automate operations with custom AI integration. Deploy in 48 hours, see results immediately.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-10">
+                        <a href="#contact" class="magnetic-btn inline-flex items-center justify-center px-8 py-4 bg-brand-500 text-white rounded-full font-semibold shadow-glow hover:bg-brand-600 transition-all">
+                            <span data-fr="hero-cta-primary">Start Free Trial</span>
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+                        </a>
+                        <a href="#process" class="inline-flex items-center justify-center px-8 py-4 bg-white/10 backdrop-blur text-white border border-white/20 rounded-full font-semibold hover:bg-white/20 hover:shadow-soft transition-all">
+                            <span data-fr="hero-cta-secondary">See How It Works</span>
+                        </a>
+
+                </div>
+                
+                <!-- Animated Chat Demo -->
+                <div class="relative animate-fade-up" style="animation-delay: 0.2s;">
+                     <div class="glass-dark rounded-2xl p-1 shadow-soft max-w-md h-[500px] ml-auto">
+                        <div class="bg-dark-800/80 backdrop-blur rounded-xl overflow-hidden">
+                            <div class="flex items-center justify-between px-4 py-3 bg-dark-900/50 border-b border-white/5">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-3 h-3 bg-green-500 rounded-full pulse-dot"></div>
+                                    <span class="text-white font-medium text-sm" data-fr="chat-header">Gavion AI Assistant</span>
+                                </div>
+                                <span class="text-xs text-white/60" data-fr="chat-status">● Online</span>
+                            </div>
+                            <div class="h-80 overflow-y-auto p-4 space-y-4 bg-dark-900/30" id="chat-demo">
+                                <div class="flex items-start gap-3 chat-bubble">
+                                    <div class="w-8 h-8 rounded-full bg-brand-500 flex-shrink-0 flex items-center justify-center text-white text-xs font-bold">G</div>
+                                    <div class="bg-white/10 text-white rounded-2xl rounded-tl-none p-3 max-w-[85%] text-sm leading-relaxed" data-fr="chat-1">Bonjour! I'm your AI assistant. How can I help you today?</div>
+                                </div>
+                                 <div class="flex items-start gap-3 justify-end chat-bubble">
+                                     <div class="bg-brand-600 text-white rounded-2xl rounded-tr-none p-3 max-w-[85%] text-sm" data-fr="chat-user-1">Hi, I'd like to book an appointment for next week.</div>
+                                     <div class="w-8 h-8 rounded-full bg-dark-600 flex-shrink-0 flex items-center justify-center text-white text-xs font-bold">U</div>
+                                 </div>
+                                <div class="flex items-start gap-3 chat-bubble">
+                                    <div class="w-8 h-8 rounded-full bg-brand-500 flex-shrink-0 flex items-center justify-center text-white text-xs font-bold">G</div>
+                                    <div class="bg-white/10 text-white rounded-2xl rounded-tl-none p-3 max-w-[85%] text-sm leading-relaxed" data-fr="chat-2">Sure! What date and time works best for you? I'll check the calendar.</div>
+                                </div>
+                            </div>
+                            <div class="p-4 bg-dark-800/50 border-t border-white/5">
+                                <form class="flex gap-3" onsubmit="return false;">
+                                     <input type="text" class="flex-1 px-4 py-3 bg-white/5 border border-white/10 rounded-full text-white placeholder-white/40 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none transition-all" data-fr="chat-placeholder" placeholder="Type a message...">
+                                    <button class="bg-brand-500 hover:bg-brand-600 text-white w-12 h-12 rounded-full flex items-center justify-center transition-all active:scale-95 shadow-glow">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+     </section>
+
+     <!-- Section Divider -->
+      <div class="section-divider reveal"></div>
+
+     <!-- Services -->
+    <section id="services" class="py-24 bg-dark-900/50 backdrop-blur-sm">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4" data-fr="services-title">Our Services</h2>
+                <p class="text-lg text-white/70 leading-relaxed" data-fr="services-subtitle">End-to-end AI solutions that transform how you engage with customers and run your business.</p>
+            </div>
+
+             <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-8">
+                <!-- Service 1 -->
+                <article class="group bg-dark-800 rounded-2xl p-8 border border-white/10 hover:border-brand-500 transition-all duration-300 hover:shadow-glow reveal">
+                     <div class="w-14 h-14 rounded-xl bg-brand-500 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                         <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                         </svg>
+                     </div>
+                    <h3 class="text-xl font-semibold text-white mb-3" data-fr="service-1-title">AI Website Chatbot</h3>
+                    <p class="text-white/70 text-sm leading-relaxed mb-4" data-fr="service-1-desc">24/7 automated answering that captures leads and answers FAQs with human-like conversation.</p>
+                    <ul class="space-y-2 text-sm text-white/60">
+                        <li data-fr="service-1-1">Lead capture & qualification</li>
+                        <li data-fr="service-1-2">Custom training on your docs</li>
+                        <li data-fr="service-1-3">Bilingual EN/FR out of the box</li>
+                        <li data-fr="service-1-4">Easy embeddable widget</li>
+                    </ul>
+                </article>
+
+                <!-- Service 2 -->
+                <article class="group bg-dark-800 rounded-2xl p-8 border border-white/10 hover:border-brand-500 transition-all duration-300 hover:shadow-glow reveal" style="animation-delay: 0.1s;">
+                     <div class="w-14 h-14 rounded-xl bg-brand-500 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                         <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                         </svg>
+                     </div>
+                    <h3 class="text-xl font-semibold text-white mb-3" data-fr="service-2-title">AI Desk Assistant</h3>
+                    <p class="text-white/70 text-sm leading-relaxed mb-4" data-fr="service-2-desc">Automated call handling, appointment scheduling, and smart reminders that keep your calendar full.</p>
+                    <ul class="space-y-2 text-sm text-white/60">
+                        <li data-fr="service-2-1">Appointment booking synced to Google Calendar</li>
+                        <li data-fr="service-2-2">Email & SMS reminders</li>
+                        <li data-fr="service-2-3">Escalation to human when needed</li>
+                        <li data-fr="service-2-4">Voice + chat interfaces</li>
+                    </ul>
+                </article>
+
+                <!-- Service 3 -->
+                <article class="group bg-dark-800 rounded-2xl p-8 border border-white/10 hover:border-brand-500 transition-all duration-300 hover:shadow-glow reveal" style="animation-delay: 0.2s;">
+                     <div class="w-14 h-14 rounded-xl bg-brand-500 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                         <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 11l3 3L22 4"></path>
+                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path>
+                         </svg>
+                     </div>
+                    <h3 class="text-xl font-semibold text-white mb-3" data-fr="service-3-title">Lead Qualification</h3>
+                    <p class="text-white/70 text-sm leading-relaxed mb-4" data-fr="service-3-desc">Automated prospecting and data enrichment so you only talk to qualified, high-intent leads.</p>
+                    <ul class="space-y-2 text-sm text-white/60">
+                        <li data-fr="service-3-1">Web research & scraping</li>
+                        <li data-fr="service-3-2">CRM integration (HubSpot, Salesforce)</li>
+                        <li data-fr="service-3-3">Lead scoring & prioritization</li>
+                        <li data-fr="service-3-4">Real-time dashboard</li>
+                    </ul>
+                </article>
+
+                <!-- Service 4 -->
+                <article class="group bg-dark-800 rounded-2xl p-8 border border-white/10 hover:border-brand-500 transition-all duration-300 hover:shadow-glow reveal" style="animation-delay: 0.3s;">
+                     <div class="w-14 h-14 rounded-xl bg-brand-500 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                         <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                         </svg>
+                     </div>
+                    <h3 class="text-xl font-semibold text-white mb-3" data-fr="service-4-title">Workflow Automation</h3>
+                    <p class="text-white/70 text-sm leading-relaxed mb-4" data-fr="service-4-desc">Connect AI to your existing tools with Zapier/Make integrations and custom API connectors.</p>
+                    <ul class="space-y-2 text-sm text-white/60">
+                        <li data-fr="service-4-1">Zapier, Make.com, n8n</li>
+                        <li data-fr="service-4-2">Custom webhooks & APIs</li>
+                        <li data-fr="service-4-3">Process optimization consulting</li>
+                        <li data-fr="service-4-4">Monitoring & alerts</li>
+                    </ul>
+                 </article>
+
+                 <!-- Service 5 - Web Design -->
+                 <article class="group bg-dark-800 rounded-2xl p-8 border border-white/10 hover:border-brand-500 transition-all duration-300 hover:shadow-glow reveal" style="animation-delay: 0.4s;">
+                      <div class="w-14 h-14 rounded-xl bg-brand-500 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                          <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 5a1 1 0 011-1h4a1 1 0 010 2H5a1 1 0 01-1-5zm0 8a1 1 0 011-1h4a1 1 0 010 2H5a1 1 0 01-1-5zm0 8a1 1 0 011-1h4a1 1 0 010 2H5a1 1 0 01-1-5"></path>
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 14a1 1 0 00-1-1 1 1 0 00-1 1v2a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 00-1-1z"></path>
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 5h16v2H4z"></path>
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 12h16"></path>
+                          </svg>
+                      </div>
+                     <h3 class="text-xl font-semibold text-white mb-3" data-fr="service-5-title">Web Design</h3>
+                     <p class="text-white/70 text-sm leading-relaxed mb-4" data-fr="service-5-desc">Modern, responsive website design that captures your brand and converts visitors into customers.</p>
+                     <ul class="space-y-2 text-sm text-white/60">
+                         <li data-fr="service-5-1">Custom, mobile-first designs</li>
+                         <li data-fr="service-5-2">Fast loading & SEO optimized</li>
+                         <li data-fr="service-5-3">Brand-aligned visuals</li>
+                         <li data-fr="service-5-4">Ongoing maintenance available</li>
+                     </ul>
+                 </article>
+             </div>
+         </div>
+     </section>
+
+    <!-- Why Us / Stats -->
+    <section id="why-us" class="py-24 bg-black/50 backdrop-blur-sm">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4" data-fr="why-title">Why Gavion?</h2>
+                <p class="text-lg text-white/70 leading-relaxed" data-fr="why-subtitle">We're not just another AI vendor. We're your integration partner — built on transparency, security, and results.</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto">
+                <div class="text-center reveal" style="animation-delay: 0.1s;">
+                    <div class="text-4xl md:text-5xl font-bold text-brand-500 mb-2">48h</div>
+                    <div class="text-sm text-white/60 uppercase tracking-wider" data-fr="stat-1">Avg. Deployment</div>
+                </div>
+                <div class="text-center reveal" style="animation-delay: 0.2s;">
+                    <div class="text-4xl md:text-5xl font-bold text-brand-500 mb-2">99.9%</div>
+                    <div class="text-sm text-white/60 uppercase tracking-wider" data-fr="stat-2">Uptime SLA</div>
+                </div>
+                <div class="text-center reveal" style="animation-delay: 0.3s;">
+                    <div class="text-4xl md:text-5xl font-bold text-brand-500 mb-2">24/7</div>
+                    <div class="text-sm text-white/60 uppercase tracking-wider" data-fr="stat-3">Support</div>
+                </div>
+                <div class="text-center reveal" style="animation-delay: 0.4s;">
+                    <div class="text-4xl md:text-5xl font-bold text-brand-500 mb-2">100%</div>
+                    <div class="text-sm text-white/60 uppercase tracking-wider" data-fr="stat-4">Bilingual</div>
+                </div>
+            </div>
+
+            <div class="mt-20 grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <div class="reveal" style="animation-delay: 0.5s;">
+                    <div class="w-12 h-12 rounded-xl bg-brand-500/20 flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2" data-fr="feature-1-title">Secure by Design</h3>
+                    <p class="text-white/70 text-sm" data-fr="feature-1-desc">All data encrypted, hosted in Canada, GDPR & PIPEDA compliant.</p>
+                </div>
+                <div class="reveal" style="animation-delay: 0.6s;">
+                    <div class="w-12 h-12 rounded-xl bg-brand-500/20 flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2" data-fr="feature-2-title">Fast Integration</h3>
+                    <p class="text-white/70 text-sm" data-fr="feature-2-desc">Connect with Google Calendar, Sheets, and your CRM in hours, not weeks.</p>
+                </div>
+                <div class="reveal" style="animation-delay: 0.7s;">
+                    <div class="w-12 h-12 rounded-xl bg-brand-500/20 flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2" data-fr="feature-3-title">Dedicated Support</h3>
+                    <p class="text-white/70 text-sm" data-fr="feature-3-desc">Real humans help you succeed. No chatbots here (ironic, we know).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="process" class="py-24 bg-dark-800/50 backdrop-blur-sm">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4" data-fr="process-title">How It Works</h2>
+                <p class="text-lg text-white/70" data-fr="process-subtitle">From consultation to live automation in three simple steps.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- Step 1 -->
+                <div class="relative text-center reveal" style="animation-delay: 0.1s;">
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 -mt-6 w-14 h-14 bg-brand-500 text-white rounded-full flex items-center justify-center text-xl font-bold shadow-glow">1</div>
+                    <div class="mt-12 bg-dark-700 rounded-2xl p-8 shadow-soft border border-white/5">
+                        <h3 class="text-xl font-semibold mb-3" data-fr="step-1-title">Discovery Call</h3>
+                        <p class="text-white/70 text-sm leading-relaxed" data-fr="step-1-desc">We learn your business, identify automation opportunities, and define success metrics.</p>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="relative text-center reveal" style="animation-delay: 0.2s;">
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 -mt-6 w-14 h-14 bg-brand-500 text-white rounded-full flex items-center justify-center text-xl font-bold shadow-glow">2</div>
+                    <div class="mt-12 bg-dark-700 rounded-2xl p-8 shadow-soft border border-white/5">
+                        <h3 class="text-xl font-semibold mb-3" data-fr="step-2-title">Custom Setup</h3>
+                        <p class="text-white/70 text-sm leading-relaxed" data-fr="step-2-desc">We configure the AI assistant exactly for your needs, integrate with your tools, and train on your data.</p>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="relative text-center reveal" style="animation-delay: 0.3s;">
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 -mt-6 w-14 h-14 bg-brand-500 text-white rounded-full flex items-center justify-center text-xl font-bold shadow-glow">3</div>
+                    <div class="mt-12 bg-dark-700 rounded-2xl p-8 shadow-soft border border-white/5">
+                        <h3 class="text-xl font-semibold mb-3" data-fr="step-3-title">Launch & Support</h3>
+                        <p class="text-white/70 text-sm leading-relaxed" data-fr="step-3-desc">Go live in 48h. We monitor, optimize, and provide ongoing support to ensure success.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing" class="py-24 bg-black/50 backdrop-blur-sm">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4" data-fr="pricing-title">Simple, Transparent Pricing</h2>
+                <p class="text-lg text-white/70" data-fr="pricing-subtitle">No hidden fees. Cancel anytime. All plans include 30-day onboarding support.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- Starter -->
+                <div class="pricing-card bg-dark-800 rounded-2xl p-10 border border-white/10 reveal hover:shadow-soft" style="animation-delay: 0.1s;">
+                    <h3 class="text-2xl font-bold text-white mb-2" data-fr="plan-1-name">Starter</h3>
+                    <p class="text-white/60 text-sm mb-6" data-fr="plan-1-desc">For small businesses getting started with AI</p>
+                    <div class="mb-6">
+                        <span class="text-4xl font-bold text-brand-500">$199</span>
+                         <span class="text-white/60" data-fr="per-month">/month CAD</span>
+                    </div>
+                    <p class="text-sm text-white/60 mt-2" data-fr="plan-1-setup">Setup fee: $0 (one-time)</p>
+                    <ul class="space-y-3 mb-8 text-sm text-white/70">
+                        <li data-fr="plan-1-1">AI receptionist widget</li>
+                        <li data-fr="plan-1-2">Basic FAQ + canned answers</li>
+                        <li data-fr="plan-1-3">Lead capture (Google Sheets)</li>
+                        <li data-fr="plan-1-4">Appointment booking (1 calendar)</li>
+                        <li data-fr="plan-1-5">Email reminders</li>
+                        <li data-fr="plan-1-6">Admin dashboard</li>
+                        <li data-fr="plan-1-7">30 days support</li>
+                    </ul>
+                    <a href="#contact" class="block w-full text-center py-3.5 rounded-full border-2 border-brand-500 text-brand-500 font-semibold hover:bg-brand-500 hover:text-white transition-all duration-300" data-fr="get-started">Get Started</a>
+                </div>
+
+                <!-- Growth (Featured) -->
+                <div class="pricing-card featured bg-dark-800 rounded-2xl p-10 border-2 border-brand-500 relative transform md:scale-105 shadow-glow reveal" style="animation-delay: 0.2s;">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-brand-500 text-white text-xs font-bold px-4 py-1 rounded-full shadow-sm" data-fr="popular">Most Popular</div>
+                    <h3 class="text-2xl font-bold text-white mb-2" data-fr="plan-2-name">Growth</h3>
+                    <p class="text-white/60 text-sm mb-6" data-fr="plan-2-desc">For growing businesses ready to scale</p>
+                    <div class="mb-6">
+                        <span class="text-4xl font-bold text-brand-500">$399</span>
+                         <span class="text-white/60" data-fr="per-month">/month CAD</span>
+                    </div>
+                    <p class="text-sm text-white/60 mt-2" data-fr="plan-2-setup">Setup fee: $500 (one-time)</p>
+                    <ul class="space-y-3 mb-8 text-sm text-white/70">
+                        <li data-fr="plan-2-1">Everything in Starter</li>
+                        <li data-fr="plan-2-2">Full AI chat (10k tokens/mo)</li>
+                        <li data-fr="plan-2-3">Custom knowledge base</li>
+                        <li data-fr="plan-2-4">Multiple appointment types</li>
+                        <li data-fr="plan-2-5">SMS reminders optional</li>
+                        <li data-fr="plan-2-6">Basic analytics</li>
+                        <li data-fr="plan-2-7">Priority support</li>
+                    </ul>
+                    <a href="#contact" class="block w-full text-center py-3.5 rounded-full bg-brand-500 text-white font-semibold hover:bg-brand-600 transition-all duration-300 shadow-glow" data-fr="get-started">Get Started</a>
+                </div>
+
+                <!-- Agency -->
+                <div class="pricing-card bg-dark-800 rounded-2xl p-10 border border-white/10 reveal hover:shadow-soft" style="animation-delay: 0.3s;">
+                    <h3 class="text-2xl font-bold text-white mb-2" data-fr="plan-3-name">Agency</h3>
+                    <p class="text-white/60 text-sm mb-6" data-fr="plan-3-desc">For agencies and multi-location businesses</p>
+                    <div class="mb-6">
+                        <span class="text-4xl font-bold text-brand-500">$799</span>
+                         <span class="text-white/60" data-fr="per-month">/month CAD</span>
+                    </div>
+                    <p class="text-sm text-white/60 mt-2" data-fr="plan-3-setup">Setup fee: Contact us</p>
+                    <ul class="space-y-3 mb-8 text-sm text-white/70">
+                        <li data-fr="plan-3-1">Everything in Growth</li>
+                        <li data-fr="plan-3-2">White-label (custom domain)</li>
+                        <li data-fr="plan-3-3">Multi-client dashboard</li>
+                        <li data-fr="plan-3-4">API access</li>
+                        <li data-fr="plan-3-5">Custom integrations</li>
+                        <li data-fr="plan-3-6">Monthly strategy call</li>
+                        <li data-fr="plan-3-7">Dedicated account manager</li>
+                    </ul>
+                    <a href="#contact" class="block w-full text-center py-3.5 rounded-full border-2 border-brand-500 text-brand-500 font-semibold hover:bg-brand-500 hover:text-white transition-all duration-300" data-fr="contact-sales">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="py-24 bg-dark-800/50 backdrop-blur-sm">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4" data-fr="testimonials-title">Trusted by Businesses Across Quebec</h2>
+                <p class="text-lg text-white/70" data-fr="testimonials-subtitle">See what our clients say about working with Gavion.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div class="bg-dark-700 rounded-2xl p-8 shadow-soft border border-white/5 reveal" style="animation-delay: 0.1s;">
+                    <div class="flex mb-4 text-brand-500">
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    </div>
+                    <blockquote class="text-white/80 text-sm leading-relaxed mb-6" data-fr="testimonial-1">"Gavion's AI assistant now handles 40% of our inquiries without lifting a finger. Our receptionist is freed up for what matters. Best investment we've made."</blockquote>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-brand-500 flex items-center justify-center text-white font-semibold">SM</div>
+                        <div>
+                            <p class="font-semibold text-white text-sm" data-fr="testimonial-1-name">Sophie Martin</p>
+                            <p class="text-xs text-white/60" data-fr="testimonial-1-role">Salon Owner, Montreal</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-dark-700 rounded-2xl p-8 shadow-soft border border-white/5 reveal" style="animation-delay: 0.2s;">
+                    <div class="flex mb-4 text-brand-500">
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    </div>
+                    <blockquote class="text-white/80 text-sm leading-relaxed mb-6" data-fr="testimonial-2">"Since implementing Gavion, we've increased qualified leads by 60% and cut admin time in half. Worth every penny. The bilingual support makes serving our Quebec clients effortless."</blockquote>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-brand-500 flex items-center justify-center text-white font-semibold">LT</div>
+                        <div>
+                            <p class="font-semibold text-white text-sm" data-fr="testimonial-2-name">Luc Tremblay</p>
+                            <p class="text-xs text-white/60" data-fr="testimonial-2-role">Contractor, QC</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-dark-700 rounded-2xl p-8 shadow-soft border border-white/5 reveal" style="animation-delay: 0.3s;">
+                    <div class="flex mb-4 text-brand-500">
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                    </div>
+                    <blockquote class="text-white/80 text-sm leading-relaxed mb-6" data-fr="testimonial-3">"The bilingual support is a game-changer for our Quebec clientele. Professional setup, amazing support. We've cut missed appointments by 80%."</blockquote>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-brand-500 flex items-center justify-center text-white font-semibold">MD</div>
+                        <div>
+                            <p class="font-semibold text-white text-sm" data-fr="testimonial-3-name">Marie Dubois</p>
+                            <p class="text-xs text-white/60" data-fr="testimonial-3-role">Medical Clinic, Laval</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="py-24 bg-black/50 backdrop-blur-sm">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4" data-fr="contact-title">Let's Build Something Great</h2>
+                <p class="text-lg text-white/70" data-fr="contact-subtitle">Ready to automate? Book a free 30-minute consultation. No sales pitch, just a conversation about your needs.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-16 max-w-5xl mx-auto">
+                <!-- Contact Info -->
+                <div class="space-y-8 reveal" style="animation-delay: 0.1s;">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4 text-white" data-fr="contact-info-title">Contact Information</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-brand-500/20 flex items-center justify-center text-brand-500 flex-shrink-0">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-white mb-1" data-fr="contact-email-label">Email</h4>
+                                    <p class="text-white/70">ai.gavion@gmail.com</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-brand-500/20 flex items-center justify-center text-brand-500 flex-shrink-0">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-white mb-1" data-fr="contact-location-label">Location</h4>
+                                    <p class="text-white/70" data-fr="contact-location-val">Montreal, Quebec, Canada</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-brand-500/20 flex items-center justify-center text-brand-500 flex-shrink-0">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path></svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-white mb-1" data-fr="contact-languages-label">Languages</h4>
+                                    <p class="text-white/70" data-fr="contact-languages-val">Français & English</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-6 bg-brand-500/10 rounded-2xl border border-brand-500/30">
+                        <h4 class="font-semibold text-white mb-2" data-fr="response-time-title">Response Time</h4>
+                        <p class="text-sm text-white/70 mb-4" data-fr="response-time-desc">We respond to all inquiries within 4 business hours.</p>
+                        <div class="flex items-center gap-2 text-sm text-white/60">
+                            <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                            <span data-fr="status-available">Currently available for consultations</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="reveal" style="animation-delay: 0.2s;">
+                    <form class="bg-dark-800 rounded-2xl p-8 shadow-soft border border-white/10 space-y-6" action="https://docs.google.com/forms/d/e/YOUR_FORM_ID/formResponse" method="POST" target="_blank">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="name" class="block text-sm font-semibold text-white mb-2" data-fr="form-name-label">Name</label>
+                                <input type="text" id="name" name="name" required class="w-full px-4 py-3 rounded-xl border border-white/20 bg-dark-700 text-white placeholder-white/40 focus:border-brand-500 focus:ring-3 focus:ring-brand-500/30 outline-none transition-all">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-semibold text-white mb-2" data-fr="form-email-label">Email</label>
+                                <input type="email" id="email" name="email" required class="w-full px-4 py-3 rounded-xl border border-white/20 bg-dark-700 text-white placeholder-white/40 focus:border-brand-500 focus:ring-3 focus:ring-brand-500/30 outline-none transition-all">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="business" class="block text-sm font-semibold text-white mb-2" data-fr="form-business-label">Business Name</label>
+                            <input type="text" id="business" name="business" class="w-full px-4 py-3 rounded-xl border border-white/20 bg-dark-700 text-white placeholder-white/40 focus:border-brand-500 focus:ring-3 focus:ring-brand-500/30 outline-none transition-all">
+                        </div>
+
+                        <div>
+                            <label for="package" class="block text-sm font-semibold text-white mb-2" data-fr="form-package-label">Interested Package</label>
+                            <select id="package" name="package" class="w-full px-4 py-3 rounded-xl border border-white/20 bg-dark-700 text-white focus:border-brand-500 focus:ring-3 focus:ring-brand-500/30 outline-none transition-all">
+                                <option value="Starter" data-fr="plan-starter">Starter ($199/mo)</option>
+                                <option value="Growth" data-fr="plan-growth">Growth ($399/mo)</option>
+                                <option value="Agency" data-fr="plan-agency">Agency ($799/mo)</option>
+                                <option value="Custom" data-fr="plan-custom">Custom Solution</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="message" class="block text-sm font-semibold text-white mb-2" data-fr="form-message-label">How can we help?</label>
+                             <textarea id="message" name="message" rows="4" class="w-full px-4 py-3 rounded-xl border border-white/20 bg-dark-700 text-white placeholder-white/40 focus:border-brand-500 focus:ring-3 focus:ring-brand-500/30 outline-none transition-all resize-none" data-fr="form-message-placeholder" placeholder="Tell us about your business needs..."></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-4 bg-brand-500 text-white rounded-xl font-semibold hover:bg-brand-600 transition-all duration-300 shadow-glow hover:shadow-lg" data-fr="form-submit">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+     <footer class="bg-black/50 py-16 backdrop-blur-sm">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+                <div class="text-center md:text-left">
+                      <img src="GAVION_logo_transparent_4096w.png" alt="Gavion" width="320" height="100" class="h-20 w-auto mx-auto md:mx-0 mb-4">
+                    <p class="text-white/60 max-w-md mx-auto md:mx-0 text-sm" data-fr="footer-tagline">AI Integration Agency built for Montreal businesses. Automate, qualify, and grow.</p>
+                </div>
+                <ul class="flex flex-wrap justify-center gap-6 text-sm">
+                    <li><a href="#services" class="text-white/60 hover:text-brand-500 transition-colors" data-fr="footer-services">Services</a></li>
+                    <li><a href="#pricing" class="text-white/60 hover:text-brand-500 transition-colors" data-fr="footer-pricing">Tarifs</a></li>
+                    <li><a href="#testimonials" class="text-white/60 hover:text-brand-500 transition-colors" data-fr="footer-testimonials">Témoignages</a></li>
+                    <li><a href="#contact" class="text-white/60 hover:text-brand-500 transition-colors" data-fr="footer-contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="border-t border-white/10 mt-12 pt-6 text-center text-xs text-white/40">
+                <p data-fr="copyright">© 2025 Agence d'Intégration IA Gavion. Tous droits réservés.</p>
+            </div>
+        </div>
+     </footer>
+
+
+
+
+
+     <script>
+        // Store original English text immediately (script runs at end of body)
+        document.querySelectorAll('[data-fr]').forEach(el => {
+            if (!el.dataset.originalText) {
+                const tag = el.tagName;
+                if (tag === 'INPUT' || tag === 'TEXTAREA') {
+                    el.dataset.originalText = el.placeholder;
+                } else {
+                    el.dataset.originalText = el.innerHTML;
+                }
+            }
+        });
+
+        const translations = {
+            en: {
+            },
+            fr: {
+                'nav-services': 'Services',
+                'nav-why': 'Pourquoi nous',
+                'nav-process': 'Comment Ça Marche',
+                'nav-pricing': 'Tarifs',
+                'nav-testimonials': 'Témoignages',
+                'nav-contact': 'Contact',
+                'nav-cta': 'Commencer',
+                'hero-title': 'Automatisez votre entreprise avec <span class="text-brand-500">l\'IA</span>',
+                'hero-subtitle': 'Gavion aide les petites entreprises à qualifier des prospects, à gagner du temps et à automatiser leurs opérations avec une intégration IA personnalisée. Déploiement en 48h, résultats immédiats.',
+                'hero-cta-primary': 'Essai Gratuit',
+                'hero-cta-secondary': 'Voir Comment Ça Marche',
+                'hero-badge': 'Agence d\'Intégration IA',
+                'hero-gradient': 'Conçu pour Montréal.',
+                'chat-header': 'Assistant IA Gavion',
+                'chat-status': '● En ligne',
+                'chat-1': 'Bonjour! Je suis votre assistant IA. Comment puis-je vous aider?',
+                'chat-2': 'Bien sûr! Quelle date et heure vous conviennent? Je vérifie le calendrier.',
+                'chat-user-1': 'Bonjour, je voudrais prendre rendez-vous pour la semaine prochaine.',
+                'chat-placeholder': 'Tapez un message...',
+                'trust-1': 'Déploiement en 48h',
+                'trust-2': 'Disponibilité 99.9%',
+                'trust-3': 'Bilingue FR/EN',
+                'services-title': 'Nos Services',
+                'services-subtitle': 'Solutions d\'IA complètes qui transforment votre engagement client et vos opérations.',
+                'service-1-title': 'Chatbot de site Web IA',
+                'service-1-desc': 'Réponse automatisée 24/7 qui capte des leads et répond aux FAQ avec une conversation naturelle.',
+                'service-1-1': 'Capture et qualification de leads',
+                'service-1-2': 'Entraînement personnalisé sur vos docs',
+                'service-1-3': 'Bilingue FR/EN dès la sortie',
+                'service-1-4': 'Widget facile à intégrer',
+                'service-2-title': 'Assistant de bureau IA',
+                'service-2-desc': 'Gestion automatisée des appels, planification de rendez-vous et rappels intelligents.',
+                'service-2-1': 'Rendez-vous synchronisés Google Calendar',
+                'service-2-2': 'Rappels par email et SMS',
+                'service-2-3': 'Escalade vers un humain',
+                'service-2-4': 'Interfaces vocales + chat',
+                'service-3-title': 'Qualification de leads',
+                'service-3-desc': 'Prospection automatisée et enrichissement de données pour ne parler qu\'à des clients qualifiés.',
+                'service-3-1': 'Recherche web & scraping',
+                'service-3-2': 'Intégration CRM (HubSpot, Salesforce)',
+                'service-3-3': 'Scoring et priorisation',
+                'service-3-4': 'Tableau de bord en temps réel',
+                'service-4-title': 'Automatisation des flux',
+                'service-4-desc': 'Connectez l\'IA à vos outils existants avec intégrations Zapier/Make et connecteurs API personnalisés.',
+                'service-4-1': 'Zapier, Make.com, n8n',
+                'service-4-2': 'Webhooks et APIs personnalisés',
+                'service-4-3': 'Conseil en optimisation de processus',
+                'service-4-4': 'Surveillance et alertes',
+                'service-5-title': 'Design Web',
+                'service-5-desc': 'Design de site web moderne et responsive qui capture votre marque et convertit les visiteurs en clients.',
+                'service-5-1': 'Designs personnalisés et mobile-first',
+                'service-5-2': 'Chargement rapide et optimisé SEO',
+                'service-5-3': 'Visuels alignés avec votre marque',
+                'service-5-4': 'Maintenance continue disponible',
+                'why-title': 'Pourquoi Gavion?',
+                'why-subtitle': 'Nous ne sommes pas juste un autre fournisseur d\'IA. Nous sommes votre partenaire d\'intégration — transparent, sécurisé et axé sur les résultats.',
+                'stat-1': 'Déploiement Moyen',
+                'stat-2': 'Disponibilité SLA',
+                'stat-3': 'Support',
+                'stat-4': 'Bilingue',
+                'feature-1-title': 'Sécurité intégrée',
+                'feature-1-desc': 'Toutes les données chiffrées, hébergées au Canada, conformes LPRPDE et RGPD.',
+                'feature-2-title': 'Intégration rapide',
+                'feature-2-desc': 'Connectez-vous à Google Calendar, Sheets et votre CRM en heures, pas en semaines.',
+                'feature-3-title': 'Support dédié',
+                'feature-3-desc': 'De vrais humains vous aident à réussir. Pas de chatbots ici (ironique, on sait).',
+                'process-title': 'Comment Ça Marche',
+                'process-subtitle': 'De la consultation à l\'automatisation en trois étapes simples.',
+                'step-1-title': 'Appel Découverte',
+                'step-1-desc': 'Nous apprenons votre métier, identifions les opportunités d\'automatisation et définissons des objectifs de succès.',
+                'step-2-title': 'Configuration Personnalisée',
+                'step-2-desc': 'Nous configurons l\'assistant IA exactement selon vos besoins, l\'intégrons à vos outils et l\'entraînons sur vos données.',
+                'step-3-title': 'Lancement & Support',
+                'step-3-desc': 'En ligne en 48h. Nous surveillons, optimisons et fournissons un support continu pour assurer votre succès.',
+                'pricing-title': 'Tarification Simple et Transparente',
+                'pricing-subtitle': 'Aucun frais caché. Résiliation à tout moment. Tous les forfaits incluent 30 jours d\'accompagnement.',
+                'plan-1-name': 'Démarrage',
+                'plan-1-desc': 'Pour les petites entreprises qui débutent avec l\'IA',
+                'per-month': '/mois CAD',
+                'plan-1-1': 'Widget assistant IA',
+                'plan-1-2': 'FAQ basique + réponses prédéfinies',
+                'plan-1-3': 'Capture de leads (Google Sheets)',
+                'plan-1-4': 'Rendez-vous (1 calendrier)',
+                'plan-1-5': 'Rappels par email',
+                'plan-1-6': 'Tableau de bord admin',
+                'plan-1-7': '30 jours de support',
+                'plan-2-name': 'Croissance',
+                'plan-2-desc': 'Pour les entreprises en croissance prêtes à scaler',
+                'plan-2-1': 'Tout inclus dans Starter',
+                'plan-2-2': 'Chat IA complet (10k tokens/mois)',
+                'plan-2-3': 'Base de connaissances personnalisée',
+                'plan-2-4': 'Plusieurs types de rendez-vous',
+                'plan-2-5': 'Rappels SMS optionnels',
+                'plan-2-6': 'Analyses basiques',
+                'plan-2-7': 'Support prioritaire',
+                'plan-3-name': 'Agence',
+                'plan-3-desc': 'Pour les agences et entreprises multi-sites',
+                'plan-3-1': 'Tout inclus dans Growth',
+                'plan-3-2': 'White-label (domaine personnalisé)',
+                'plan-3-3': 'Tableau de bord multi-clients',
+                'plan-3-4': 'Accès API',
+                'plan-3-5': 'Intégrations personnalisées',
+                'plan-3-6': 'Appel stratégique mensuel',
+                'plan-3-7': 'Gestionnaire de compte dédié',
+                'popular': 'Le Plus Populaire',
+                'contact-sales': 'Contacter Ventes',
+                'get-started': 'Commencer',
+                'testimonials-title': 'Approuvé par des entreprises du Québec',
+                'testimonials-subtitle': 'Voyez ce que nos clients disent de leur expérience avec Gavion.',
+                'testimonial-1': '"L\'assistant IA de Gavion gère maintenant 40% de nos demandes sans que nous levions le petit doigt. Notre réceptionniste est libérée pour ce qui compte vraiment. Meilleur investissement qu\'on ait fait."',
+                'testimonial-1-name': 'Sophie Martin',
+                'testimonial-1-role': 'Propriétaire de Salon, Montréal',
+                'testimonial-2': '"Depuis l\'implémentation de Gavion, nous avons augmenté les leads qualifiés de 60% et réduit le temps administratif de moitié. Ça vaut chaque sou. Le support bilingue rend service à notre clientèle québécoise sans effort."',
+                'testimonial-2-name': 'Luc Tremblay',
+                'testimonial-2-role': 'Entrepreneur, Québec',
+                'testimonial-3': '"Le support bilingue est un changeur de jeu pour notre clientèle québécoise. Installation professionnelle, support incroyable. Nous avons réduit les rendez-vous manqués de 80%."',
+                'testimonial-3-name': 'Marie Dubois',
+                'testimonial-3-role': 'Clinique Médicale, Laval',
+                'contact-title': 'Parlons de votre projet',
+                'contact-subtitle': 'Prêt à automatiser? Réservez une consultation gratuite de 30 minutes. Pas de pitch de vente, juste une conversation sur vos besoins.',
+                'contact-info-title': 'Contactez-nous',
+                'contact-email-label': 'Email',
+                'contact-location-label': 'Localisation',
+                'contact-location-val': 'Montréal, Québec, Canada',
+                'contact-languages-label': 'Langues',
+                'contact-languages-val': 'Français & Anglais',
+                'response-time-title': 'Temps de réponse',
+                'response-time-desc': 'Nous répondons à toutes les demandes dans les 4 heures ouvrables.',
+                'status-available': 'Actuellement disponible pour les consultations',
+                'form-name-label': 'Nom',
+                'form-email-label': 'Email',
+                'form-business-label': "Nom de l'entreprise",
+                'form-package-label': 'Forfait Intéressé',
+                'plan-starter': 'Démarrage (199$/mois)',
+                'plan-growth': 'Croissance (399$/mois)',
+                'plan-agency': 'Agence (799$/mois)',
+                'plan-custom': 'Solution Personnalisée',
+                'plan-1-setup': 'Frais de configuration: 0$ (gratuit)',
+                'plan-2-setup': 'Frais de configuration: 500$ (unique)',
+                'plan-3-setup': 'Frais de configuration: Nous contacter',
+                'form-message-label': 'Comment pouvons-nous aider?',
+                'form-message-placeholder': "Dites-nous vos besoins d'affaires...",
+                'form-submit': 'Envoyer le message',
+                'footer-tagline': 'Agence d\'Intégration IA basée à Montréal. Automatisez, qualifiez, développez.',
+                'footer-services': 'Services',
+                'footer-pricing': 'Tarifs',
+                'footer-testimonials': 'Témoignages',
+                'footer-contact': 'Contact',
+                'copyright': '© 2025 Agence d\'Intégration IA Gavion. Tous droits réservés.',
+                // Process steps
+                'step-1-title': 'Appel Découverte',
+                'step-1-desc': 'Nous apprenons votre métier, identifions les opportunités d\'automatisation et définissons des objectifs de succès.',
+                'step-2-title': 'Configuration Personnalisée',
+                'step-2-desc': 'Nous configurons l\'assistant IA exactement selon vos besoins, l\'intégrons à vos outils et l\'entraînons sur vos données.',
+                'step-3-title': 'Lancement & Support',
+                'step-3-desc': 'En ligne en 48h. Nous surveillons, optimisons et fournissons un support continu pour assurer votre succès.',
+                // Pricing
+                'per-month': '/mois CAD',
+                'plan-1-name': 'Démarrage',
+                'plan-1-desc': 'Pour les petites entreprises qui débutent avec l\'IA',
+                'plan-1-1': 'Assistant IA widget',
+                'plan-1-2': 'FAQ basique + réponses prédéfinies',
+                'plan-1-3': 'Capture de leads (Google Sheets)',
+                'plan-1-4': 'Rendez-vous (1 calendrier)',
+                'plan-1-5': 'Rappels par email',
+                'plan-1-6': 'Tableau de bord admin',
+                'plan-1-7': '30 jours de support',
+                'plan-2-name': 'Croissance',
+                'plan-2-desc': 'Pour les entreprises en croissance prêtes à scaler',
+                'plan-2-1': 'Tout inclus dans Démarrage',
+                'plan-2-2': 'Chat IA complet (10k tokens/mois)',
+                'plan-2-3': 'Base de connaissances personnalisée',
+                'plan-2-4': 'Plusieurs types de rendez-vous',
+                'plan-2-5': 'Rappels SMS optionnels',
+                'plan-2-6': 'Analyses basiques',
+                'plan-2-7': 'Support prioritaire',
+                'plan-3-name': 'Agence',
+                'plan-3-desc': 'Pour les agences et entreprises multi-sites',
+                'plan-3-1': 'Tout inclus dans Croissance',
+                'plan-3-2': 'White-label (domaine personnalisé)',
+                'plan-3-3': 'Tableau de bord multi-clients',
+                'plan-3-4': 'Accès API',
+                'plan-3-5': 'Intégrations personnalisées',
+                'plan-3-6': 'Appel stratégique mensuel',
+                'plan-3-7': 'Gestionnaire de compte dédié',
+                'popular': 'Le Plus Populaire',
+                'contact-sales': 'Contacter Ventes',
+                'get-started': 'Commencer'
+            }
+        };
+
+
+
+        let currentLang = 'en';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+            
+            document.querySelectorAll('[data-fr]').forEach(el => {
+                const key = el.getAttribute('data-fr');
+                if (lang === 'fr' && translations.fr[key]) {
+                    const translation = translations.fr[key];
+                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                        el.placeholder = translation;
+                    } else {
+                        el.innerHTML = translation;
+                    }
+                } else if (lang === 'en') {
+                    const original = el.dataset.originalText;
+                    if (original !== undefined) {
+                        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                            el.placeholder = original;
+                        } else {
+                            el.innerHTML = original;
+                        }
+                    }
+                }
+            });
+            
+            // Update toggle button text
+            const langToggle = document.getElementById('langToggle');
+            if (langToggle) {
+                langToggle.textContent = lang === 'en' ? 'Français' : 'English';
+            }
+
+
+        }
+
+        // Event listener for language toggle
+        const langToggleBtn = document.getElementById('langToggle');
+        if (langToggleBtn) {
+            langToggleBtn.addEventListener('click', () => {
+                setLanguage(currentLang === 'en' ? 'fr' : 'en');
+            });
+        }
+
+        // Set initial language to English
+        setLanguage('en');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                } else {
+                    // Remove active class when element leaves viewport to reset animation
+                    entry.target.classList.remove('active');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -10%' });
+
+        // Observe all reveal-type elements
+        document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .diagonal-reveal, .section-divider').forEach(el => observer.observe(el));
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === '#') {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        });
+
+        const navbar = document.getElementById('navbar');
+        if (navbar) {
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('bg-dark-900/90', 'backdrop-blur-md', 'shadow-soft');
+                    navbar.classList.remove('bg-transparent');
+                } else {
+                    navbar.classList.remove('bg-dark-900/90', 'backdrop-blur-md', 'shadow-soft');
+                    navbar.classList.add('bg-transparent');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
