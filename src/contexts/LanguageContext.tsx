@@ -14,7 +14,8 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [lang, setLang] = useState<Language>(() => {
     // Check localStorage on mount, default to 'en'
-    return (localStorage.getItem('gavion_lang') as Language) || 'en';
+    const saved = localStorage.getItem('gavion_lang');
+    return (saved === 'en' || saved === 'fr') ? (saved as Language) : 'en';
   });
 
   useEffect(() => {
@@ -26,9 +27,26 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   };
 
   const t = (key: string): string => {
-    const translation = translations[lang][key as keyof typeof translations.en];
+    // Guard against invalid language
+    const langTranslations = translations[lang];
+    if (!langTranslations) {
+      console.warn(`Invalid language: ${lang}, falling back to English`);
+      // Fallback to English
+      const fallback = translations.en[key as keyof typeof translations.en];
+      if (!fallback) {
+        console.warn(`Missing translation for key: ${key} in English`);
+        return key;
+      }
+      // Replace <brand> tags with styled brand word (orange)
+      return fallback.replace(
+        /<brand>/g,
+        `<span class="text-brand-500">AI</span>`
+      );
+    }
+
+    const translation = langTranslations[key as keyof typeof translations.en];
     if (!translation) {
-      console.warn(`Missing translation for key: ${key}`);
+      console.warn(`Missing translation for key: ${key} in ${lang}`);
       return key;
     }
     // Replace <brand> tags with styled brand word (orange)
