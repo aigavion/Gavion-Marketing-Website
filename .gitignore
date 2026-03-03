@@ -42,3 +42,9 @@ Projects/
 dashboard.html
 package-lock.json
 package.json
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example
