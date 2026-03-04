@@ -120,10 +120,7 @@ export default function RadialOrbitalTimeline({
     const y = radius * Math.sin(radian) + centerOffset.y;
 
     const zIndex = Math.round(100 + 50 * Math.cos(radian));
-    const opacity = Math.max(
-      0.4,
-      Math.min(1, 0.4 + 0.6 * ((1 + Math.sin(radian)) / 2))
-    );
+    const opacity = 1;
 
     return { x, y, angle, zIndex, opacity };
   };
@@ -176,7 +173,7 @@ export default function RadialOrbitalTimeline({
             <div className="w-[14px] h-[14px] rounded-full bg-white/80 backdrop-blur-md"></div>
           </div>
 
-          <div className="absolute w-[680px] h-[680px] rounded-full border border-white/10"></div>
+          <div className="absolute w-[680px] h-[680px] rounded-full border border-white/30"></div>
 
           {timelineData.map((item, index) => {
             const position = calculateNodePosition(index, timelineData.length);
@@ -223,7 +220,7 @@ export default function RadialOrbitalTimeline({
                       ? "bg-white text-black"
                       : isRelated
                       ? "bg-white/50 text-black"
-                      : "bg-black text-white"
+                      : "bg-black/80 text-white"
                   }
                   border-2 
                   ${
@@ -231,7 +228,7 @@ export default function RadialOrbitalTimeline({
                       ? "border-white shadow-lg shadow-white/30"
                       : isRelated
                       ? "border-white animate-pulse"
-                      : "border-white/40"
+                      : "border-white/80"
                   }
                   transition-all duration-300 transform
                   ${isExpanded ? "scale-150" : ""}
@@ -246,7 +243,7 @@ export default function RadialOrbitalTimeline({
                   whitespace-nowrap text-center
                   text-base font-semibold tracking-wider
                   transition-all duration-300 w-max
-                  ${isExpanded ? "text-white scale-125" : "text-white/70"}
+                  ${isExpanded ? "text-white scale-125" : "text-white"}
                 `}
                 >
                   {item.title}
