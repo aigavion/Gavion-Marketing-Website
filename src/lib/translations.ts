@@ -19,10 +19,18 @@ export const translations = {
     "chat-status": "● Online",
     "chat-1": "Bonjour! I'm your AI assistant. How can I help you today?",
     "chat-user-1": "Hi, I'd like to book an appointment for next week.",
-    "chat-2": "Sure! What date and time works best for you? I'll check the calendar.",
-    "chat-placeholder": "Type a message...",
+     "chat-2": "Sure! What date and time works best for you? I'll check the calendar.",
+     "chat-placeholder": "Type a message...",
+     "chat-error": "Sorry, I'm having technical difficulties. Please try again or contact us directly.",
+     "email-prompt": "I'd love to connect you with our team! Could you share your email so we can follow up?",
+     "email-name-placeholder": "Your name (optional)",
+     "email-placeholder": "Your email address *",
+     "email-company-placeholder": "Company (optional)",
+     "email-submit": "Send",
+     "cancel": "Maybe later",
+     "email-success": "Thanks! Our team will contact you shortly.",
 
-    // Services Section
+     // Services Section
     "services-title": "Our Services",
     "services-subtitle": "End-to-end AI solutions that transform how you engage with customers and run your business. Explore our interactive service ecosystem.",
 
@@ -138,10 +146,18 @@ export const translations = {
     "chat-status": "● En ligne",
     "chat-1": "Bonjour! Je suis votre assistant IA. Comment puis-je vous aider aujourd'hui?",
     "chat-user-1": "Bonjour, j'aimerais prendre un rendez-vous pour la semaine prochaine.",
-    "chat-2": "Bien sûr! Quelle date et heure vous conviendraient le mieux? Je vais vérifier le calendrier.",
-    "chat-placeholder": "Tapez un message...",
+     "chat-2": "Bien sûr! Quelle date et heure vous conviendraient le mieux? Je vais vérifier le calendrier.",
+     "chat-placeholder": "Tapez un message...",
+     "chat-error": "Désolé, j'ai des difficultés techniques. Veuillez réessayer ou contactez-nous directement.",
+     "email-prompt": "J'aimerais vous mettre en contact avec notre équipe! Pourriez-vous partager votre email pour que nous puissions suivre?",
+     "email-name-placeholder": "Votre nom (optionnel)",
+     "email-placeholder": "Votre adresse email *",
+     "email-company-placeholder": "Entreprise (optionnel)",
+     "email-submit": "Envoyer",
+     "cancel": "Plus tard",
+     "email-success": "Merci! Notre équipe vous contactera sous peu.",
 
-    // Services Section
+     // Services Section
     "services-title": "Nos Services",
     "services-subtitle": "Solutions IA de bout en bout qui transforment votre façon d'engager les clients et de gérer votre entreprise. Explorer notre écosystème de services interactif.",
 
