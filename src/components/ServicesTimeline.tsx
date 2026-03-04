@@ -111,7 +111,7 @@ export default function ServicesTimeline() {
             }
           </p>
         </div>
-        <div className="h-[600px]">
+        <div className="h-[1020px]">
           <RadialOrbitalTimeline timelineData={timelineData} />
         </div>
       </div>
