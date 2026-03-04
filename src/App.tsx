@@ -8,6 +8,7 @@ import Pricing from "@/components/Pricing";
 import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import Background from "@/components/Background";
 
 function App() {
   useEffect(() => {
@@ -48,7 +49,8 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-transparent text-white">
+      <Background />
       <Navbar />
       <main>
         <Hero />

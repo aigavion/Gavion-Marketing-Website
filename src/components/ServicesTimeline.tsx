@@ -97,8 +97,7 @@ export default function ServicesTimeline() {
   }));
 
   return (
-    <section className="py-24 relative overflow-hidden bg-black">
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-dark-900/50 to-black"></div>
+    <section className="py-24 relative overflow-hidden bg-transparent">
       <div className="container mx-auto px-6 max-w-7xl relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16 reveal">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">

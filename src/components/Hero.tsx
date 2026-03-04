@@ -198,7 +198,7 @@ export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden pt-20">
       {/* Dark overlay */}
-      <div className="absolute inset-0 bg-dark-900/50 backdrop-blur-sm"></div>
+      <div className="absolute inset-0 bg-transparent"></div>
       
       {/* Ambient glow orbs */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-500/10 rounded-full blur-3xl animate-float"></div>
