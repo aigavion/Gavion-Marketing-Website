@@ -1,7 +1,57 @@
+import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const ContactSection = () => {
   const { t } = useLanguage();
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    organization: "",
+    message: ""
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+  const [submitMessage, setSubmitMessage] = useState("");
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setSubmitStatus("idle");
+    setSubmitMessage("");
+
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/contact`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSubmitStatus("success");
+        setSubmitMessage(data.message);
+        setFormData({ name: "", email: "", organization: "", message: "" });
+      } else {
+        setSubmitStatus("error");
+        setSubmitMessage(data.error || "Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      setSubmitStatus("error");
+      setSubmitMessage("Failed to send message. Please try again later.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <section id="contact" className="py-24 bg-transparent">
@@ -33,27 +83,98 @@ const ContactSection = () => {
             </div>
           </div>
 
-          <form className="bg-dark-800 rounded-2xl p-8 shadow-soft border border-white/5 reveal" style={{ animationDelay: "0.3s" }}>
+          {submitStatus === "success" && (
+            <div className="bg-green-500/20 border border-green-500/50 text-green-400 px-6 py-4 rounded-xl mb-6 text-center">
+              <svg className="w-6 h-6 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <p className="font-medium">{submitMessage}</p>
+            </div>
+          )}
+
+          {submitStatus === "error" && (
+            <div className="bg-red-500/20 border border-red-500/50 text-red-400 px-6 py-4 rounded-xl mb-6 text-center">
+              <svg className="w-6 h-6 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+              <p className="font-medium">{submitMessage}</p>
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="bg-dark-800 rounded-2xl p-8 shadow-soft border border-white/5 reveal" style={{ animationDelay: "0.3s" }}>
             <div className="grid md:grid-cols-2 gap-6 mb-6">
               <div>
                 <label className="block text-sm font-medium text-white/70 mb-2">{t('contact-form-name')}</label>
-                <input type="text" className="w-full px-4 py-3 bg-dark-700 border border-white/10 rounded-lg text-white placeholder-white/40 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none transition-all" placeholder={t('contact-form-placeholder-name')} />
+                <input 
+                  type="text" 
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-3 bg-dark-700 border border-white/10 rounded-lg text-white placeholder-white/40 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none transition-all" 
+                  placeholder={t('contact-form-placeholder-name')} 
+                />
               </div>
               <div>
                 <label className="block text-sm font-medium text-white/70 mb-2">{t('contact-form-email')}</label>
-                <input type="email" className="w-full px-4 py-3 bg-dark-700 border border-white/10 rounded-lg text-white placeholder-white/40 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none transition-all" placeholder={t('contact-form-placeholder-email')} />
+                <input 
+                  type="email" 
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-3 bg-dark-700 border border-white/10 rounded-lg text-white placeholder-white/40 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none transition-all" 
+                  placeholder={t('contact-form-placeholder-email')} 
+                />
               </div>
             </div>
             <div className="mb-6">
               <label className="block text-sm font-medium text-white/70 mb-2">{t('contact-form-company')}</label>
-              <input type="text" className="w-full px-4 py-3 bg-dark-700 border border-white/10 rounded-lg text-white placeholder-white/40 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none transition-all" placeholder={t('contact-form-placeholder-company')} />
+              <input 
+                type="text" 
+                name="organization"
+                value={formData.organization}
+                onChange={handleChange}
+                className="w-full px-4 py-3 bg-dark-700 border border-white/10 rounded-lg text-white placeholder-white/40 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none transition-all" 
+                placeholder={t('contact-form-placeholder-company')} 
+              />
+              <input 
+                type="text" 
+                name="company"
+                className="honeypot"
+                tabIndex={-1}
+                autoComplete="off"
+                style={{ position: 'absolute', left: '-9999px' }}
+              />
             </div>
             <div className="mb-6">
               <label className="block text-sm font-medium text-white/70 mb-2">{t('contact-form-message')}</label>
-              <textarea rows={4} className="w-full px-4 py-3 bg-dark-700 border border-white/10 rounded-lg text-white placeholder-white/40 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none transition-all" placeholder={t('contact-form-placeholder-message')}></textarea>
+              <textarea 
+                rows={4} 
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-3 bg-dark-700 border border-white/10 rounded-lg text-white placeholder-white/40 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none transition-all" 
+                placeholder={t('contact-form-placeholder-message')}
+              ></textarea>
             </div>
-            <button type="submit" className="w-full py-4 bg-brand-500 text-white rounded-full font-semibold hover:bg-brand-600 transition-all duration-300 shadow-glow">
-              {t('contact-submit')}
+            <button 
+              type="submit" 
+              disabled={isLoading}
+              className="w-full py-4 bg-brand-500 text-white rounded-full font-semibold hover:bg-brand-600 transition-all duration-300 shadow-glow disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            >
+              {isLoading ? (
+                <>
+                  <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Sending...
+                </>
+              ) : (
+                t('contact-submit')
+              )}
             </button>
           </form>
         </div>
