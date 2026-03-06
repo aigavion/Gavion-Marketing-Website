@@ -1,4 +1,5 @@
 import { useLanguage } from "@/contexts/LanguageContext";
+import { ThreeDCardCarousel } from "@/components/ui/ThreeDCardCarousel";
 
 const steps = [
   {
@@ -29,19 +30,7 @@ export default function Process() {
           <p className="text-lg text-white/70">{t('process-subtitle')}</p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          {steps.map((step, index) => (
-            <div key={index} className="relative text-center reveal" style={{ animationDelay: `${0.1 * (index + 1)}s` }}>
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 -mt-6 w-14 h-14 bg-brand-500 text-white rounded-full flex items-center justify-center text-xl font-bold shadow-glow">
-                {step.number}
-              </div>
-              <div className="mt-12 bg-dark-700 rounded-2xl p-8 shadow-soft border border-white/5 h-full">
-                <h3 className="text-xl font-semibold mb-3">{t(step.titleKey)}</h3>
-                <p className="text-white/70 text-sm leading-relaxed">{t(step.descKey)}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+        <ThreeDCardCarousel steps={steps} />
       </div>
     </section>
   );
