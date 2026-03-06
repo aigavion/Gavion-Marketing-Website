@@ -48,7 +48,7 @@ export function ThreeDCardCarousel({ steps }: ThreeDCardCarouselProps) {
     <div className="relative max-w-2xl mx-auto">
       <button
         onClick={goToPrevious}
-        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-6 md:-translate-x-16 z-10 w-14 h-14 rounded-full bg-dark-800 border-2 border-brand-500 flex items-center justify-center text-brand-500 hover:bg-brand-500 hover:text-dark-800 transition-all duration-300 shadow-glow"
+        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-6 md:-translate-x-16 z-10 w-14 h-14 rounded-full bg-dark-800 border-2 border-brand-500 flex items-center justify-center text-brand-500 hover:bg-brand-500 hover:text-dark-800 transition-all duration-300"
         aria-label="Previous step"
       >
         <ChevronLeft className="w-6 h-6" />
@@ -56,13 +56,13 @@ export function ThreeDCardCarousel({ steps }: ThreeDCardCarouselProps) {
 
       <button
         onClick={goToNext}
-        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-6 md:translate-x-16 z-10 w-14 h-14 rounded-full bg-dark-800 border-2 border-brand-500 flex items-center justify-center text-brand-500 hover:bg-brand-500 hover:text-dark-800 transition-all duration-300 shadow-glow"
+        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-6 md:translate-x-16 z-10 w-14 h-14 rounded-full bg-dark-800 border-2 border-brand-500 flex items-center justify-center text-brand-500 hover:bg-brand-500 hover:text-dark-800 transition-all duration-300"
         aria-label="Next step"
       >
         <ChevronRight className="w-6 h-6" />
       </button>
 
-      <div className="overflow-hidden px-16 md:px-24">
+      <div className="overflow-hidden px-4">
         <motion.div
           className="flex"
           animate={controls}
@@ -71,9 +71,9 @@ export function ThreeDCardCarousel({ steps }: ThreeDCardCarouselProps) {
           {steps.map((step, i) => (
             <div
               key={`step-${i}`}
-              className="w-full flex-shrink-0"
+              className="w-full flex-shrink-0 px-4"
             >
-              <div className="bg-dark-800 rounded-3xl p-10 border-2 border-brand-500 shadow-glow">
+              <div className="bg-dark-800 rounded-3xl p-10 border-2 border-brand-500">
                 <div className="flex flex-col items-center text-center">
                   <div className="w-16 h-16 bg-brand-500 text-white rounded-full flex items-center justify-center text-2xl font-bold mb-6">
                     {step.number}
