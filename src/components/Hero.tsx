@@ -217,19 +217,13 @@ export default function Hero() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-10">
               <a
-                href="#contact"
-                className="inline-flex items-center justify-center px-8 py-4 bg-brand-500 text-white rounded-full font-semibold shadow-glow hover:bg-brand-600 transition-all"
+                href="#process"
+                className="inline-flex items-center justify-center px-8 py-4 bg-brand-500 text-white rounded-full font-semibold hover:bg-brand-600 transition-all"
               >
-                {t('hero-cta-primary')}
+                {t('hero-cta-secondary')}
                 <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
                 </svg>
-              </a>
-              <a
-                href="#process"
-                className="inline-flex items-center justify-center px-8 py-4 bg-white/10 backdrop-blur text-white border border-white/20 rounded-full font-semibold hover:bg-white/20 hover:shadow-soft transition-all"
-              >
-                {t('hero-cta-secondary')}
               </a>
             </div>
           </div>
@@ -249,7 +243,7 @@ export default function Hero() {
                   {messages.map((msg) => (
                     <div key={msg.id} className={`flex items-start gap-3 ${msg.from === "user" ? "justify-end" : ""}`}>
                       {msg.from === "bot" && (
-                        <div className="w-8 h-8 rounded-full bg-brand-500 flex-shrink-0 flex items-center justify-center text-white text-xs font-bold">G</div>
+                      <img src="https://i.ibb.co/1YVxD2PT/LOGO-removebg-preview.png" alt="Gavion" className="w-8 h-8 rounded-full flex-shrink-0 object-cover mt-2" style={{ animation: 'spin 7s linear infinite', animationDirection: 'reverse' }} />
                       )}
                       <div className={`rounded-2xl p-3 max-w-[85%] text-sm leading-relaxed ${msg.from === "bot" ? "bg-white/10 text-white rounded-tl-none" : "bg-brand-600 text-white rounded-tr-none"}`}>
                         {msg.text}
@@ -261,7 +255,7 @@ export default function Hero() {
                   ))}
                   {isLoading && (
                     <div className="flex items-start gap-3">
-                      <div className="w-8 h-8 rounded-full bg-brand-500 flex-shrink-0 flex items-center justify-center text-white text-xs font-bold">G</div>
+<img src="https://i.ibb.co/1YVxD2PT/LOGO-removebg-preview.png" alt="Gavion" className="w-8 h-8 rounded-full flex-shrink-0 object-cover mt-2" style={{ animation: 'spin 7s linear infinite', animationDirection: 'reverse' }} />
                       <div className="rounded-2xl p-3 bg-white/10 text-white rounded-tl-none">
                         <div className="flex gap-1">
                           <div className="w-2 h-2 bg-white/60 rounded-full animate-bounce" style={{ animationDelay: "0ms" }}></div>
