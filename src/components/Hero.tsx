@@ -96,7 +96,7 @@ export default function Hero() {
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
   }, [messages]);
 
   useEffect(() => {
@@ -188,10 +188,12 @@ export default function Hero() {
     }
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
+      e.stopPropagation();
       handleSend();
+      return false;
     }
   };
 
@@ -268,18 +270,25 @@ export default function Hero() {
                   <div ref={messagesEndRef} />
                 </div>
                 <div className="p-4 bg-dark-800/50 border-t border-white/5">
-                  <div className="flex gap-3">
+                  <form 
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleSend();
+                    }}
+                    className="flex gap-3"
+                  >
                     <input
                       ref={inputRef}
                       type="text"
                       value={inputText}
                       onChange={(e) => setInputText(e.target.value)}
-                      onKeyPress={handleKeyPress}
+                      onKeyDown={handleKeyDown}
                       className="flex-1 px-4 py-3 bg-white/5 border border-white/10 rounded-full text-white placeholder-white/40 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none transition-all"
                       placeholder={t('chat-placeholder')}
                     />
                     <button 
-                      onClick={handleSend}
+                      type="submit"
                       disabled={!inputText.trim() || isLoading}
                       className="bg-brand-500 hover:bg-brand-600 disabled:opacity-50 disabled:cursor-not-allowed text-white w-12 h-12 rounded-full flex items-center justify-center transition-all active:scale-95 shadow-glow"
                     >
@@ -287,7 +296,7 @@ export default function Hero() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
                       </svg>
                     </button>
-                  </div>
+                  </form>
                 </div>
               </div>
             </div>

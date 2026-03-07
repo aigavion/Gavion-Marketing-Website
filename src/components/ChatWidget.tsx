@@ -53,7 +53,7 @@ export default function ChatWidget() {
   }, [isOpen, lang]);
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
   }, [messages]);
 
   const handleSend = () => {
@@ -79,9 +79,11 @@ export default function ChatWidget() {
     }, 5000);
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
+      e.stopPropagation();
+      (e as any).nativeEvent?.stopImmediatePropagation?.();
       handleSend();
     }
   };
@@ -179,24 +181,31 @@ export default function ChatWidget() {
           </div>
 
           <div className="p-3 bg-dark-800 border-t border-white/10">
-            <div className="flex gap-2">
+            <form 
+              onSubmit={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                handleSend();
+              }}
+              className="flex gap-2"
+            >
               <input
                 ref={inputRef}
                 type="text"
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
-                onKeyPress={handleKeyPress}
+                onKeyDown={handleKeyDown}
                 placeholder={lang === 'fr' ? "Tapez un message..." : "Type a message..."}
                 className="flex-1 px-3 py-2 bg-white/5 border border-white/10 rounded-full text-white placeholder-white/40 text-sm focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none transition-all"
               />
               <button
-                onClick={handleSend}
+                type="submit"
                 disabled={!inputText.trim() || isLoading}
                 className="bg-brand-500 hover:bg-brand-600 disabled:opacity-50 disabled:cursor-not-allowed text-white w-10 h-10 rounded-full flex items-center justify-center transition-all"
               >
                 <Send className="w-4 h-4" />
               </button>
-            </div>
+            </form>
           </div>
         </div>
       )}

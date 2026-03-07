@@ -148,13 +148,8 @@ export default function RadialOrbitalTimeline({
             transform: `translate(${centerOffset.x}px, ${centerOffset.y}px)`,
           }}
         >
-          <div className="absolute w-[108px] h-[108px] rounded-full bg-gradient-to-br from-orange-500 via-brand-500 to-yellow-500 animate-pulse flex items-center justify-center z-10">
-            <div className="absolute w-[136px] h-[136px] rounded-full border border-white/20 animate-ping opacity-70"></div>
-            <div
-              className="absolute w-[163px] h-[163px] rounded-full border border-white/10 animate-ping opacity-50"
-              style={{ animationDelay: "0.5s" }}
-            ></div>
-            <div className="w-[14px] h-[14px] rounded-full bg-white/80 backdrop-blur-md"></div>
+          <div className="absolute w-[108px] h-[108px] flex items-center justify-center z-10" style={{ animation: 'spin 7s linear infinite reverse' }}>
+            <img src="https://i.ibb.co/1YVxD2PT/LOGO-removebg-preview.png" alt="Gavion" className="w-24 h-24 object-contain drop-shadow-[0_0_20px_rgba(255,107,0,0.8)]" />
           </div>
 
           <div className="absolute w-[680px] h-[680px] rounded-full border border-white/30"></div>
