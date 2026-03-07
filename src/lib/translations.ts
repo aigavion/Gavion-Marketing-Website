@@ -12,7 +12,7 @@ export const translations = {
     // Hero Section
     "hero-badge": "AI Integration Agency",
     "hero-title": "Automate your business with <brand></brand>",
-    "hero-subtitle": "Gavion helps small businesses qualify leads, save time, and automate operations with custom AI integration. Deploy in 48 hours, see results immediately.",
+    "hero-subtitle": "Gavion helps small businesses qualify leads, save time, and automate operations with custom AI integration.",
     "hero-cta-primary": "Start Free Trial",
     "hero-cta-secondary": "See How It Works",
     "chat-header": "Gavion AI Assistant",
@@ -121,7 +121,7 @@ export const translations = {
     "contact-submit": "Send Message",
 
     // Footer
-    "footer-copyright": "© 2024 Gavion. All rights reserved.",
+    "footer-copyright": "© 2026 Gavion. All rights reserved.",
     "footer-privacy": "Privacy",
     "footer-terms": "Terms",
     "footer-contact": "Contact",
@@ -139,7 +139,7 @@ export const translations = {
     // Hero Section
     "hero-badge": "Agence d'Intégration IA",
     "hero-title": "Automatisez votre entreprise avec <brand></brand>",
-    "hero-subtitle": "Gavion aide les petites entreprises à qualifier les prospects, à gagner du temps et à automatiser les opérations avec une intégration IA personnalisée. Déployez en 48 heures, voyez des résultats immédiatement.",
+    "hero-subtitle": "Gavion aide les petites entreprises à qualifier les prospects, à gagner du temps et à automatiser les opérations avec une intégration IA personnalisée.",
     "hero-cta-primary": "Essai Gratuit",
     "hero-cta-secondary": "Voir Comment Ça Marche",
     "chat-header": "Assistant IA Gavion",
@@ -248,7 +248,7 @@ export const translations = {
     "contact-submit": "Envoyer le Message",
 
     // Footer
-    "footer-copyright": "© 2024 Gavion. Tous droits réservés.",
+    "footer-copyright": "© 2026 Gavion. Tous droits réservés.",
     "footer-privacy": "Confidentialité",
     "footer-terms": "Conditions",
     "footer-contact": "Contact",

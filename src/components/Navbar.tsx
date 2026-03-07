@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -6,6 +7,8 @@ export default function Navbar() {
   const { toggleLanguage, t } = useLanguage();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,13 +19,26 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { href: "#services", labelKey: "nav-services" },
-    { href: "#why-us", labelKey: "nav-why" },
-    { href: "#process", labelKey: "nav-pricing" }, // Actually "How It Works" but we'll use this mapping
-    { href: "#pricing", labelKey: "nav-pricing" },
-    { href: "#testimonials", labelKey: "nav-testimonials" },
-    { href: "#contact", labelKey: "nav-contact" },
+    { path: "/services", labelKey: "nav-services", isRoute: true },
+    { path: "#why-us", labelKey: "nav-why", isRoute: false },
+    { path: "#process", labelKey: "nav-pricing", isRoute: false },
+    { path: "#pricing", labelKey: "nav-pricing", isRoute: false },
+    { path: "#testimonials", labelKey: "nav-testimonials", isRoute: false },
+    { path: "#contact", labelKey: "nav-contact", isRoute: false },
   ];
+
+  const handleNavClick = (path: string) => {
+    if (path.startsWith('#')) {
+      const element = document.querySelector(path);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    } else {
+      navigate(path);
+    }
+  };
+
+  
 
   return (
     <nav
@@ -32,7 +48,7 @@ export default function Navbar() {
     >
       <div className="container mx-auto px-6 max-w-7xl">
         <div className="flex items-center justify-between">
-          <a href="#" className="relative group" aria-label="Gavion Home">
+          <button onClick={() => navigate('/')} className="relative group bg-transparent border-none cursor-pointer" aria-label="Gavion Home">
             <img
               src="/GAVION_logo_transparent_4096w.png"
               alt="Gavion"
@@ -40,19 +56,19 @@ export default function Navbar() {
               height={100}
               className="h-24 w-auto transition-transform group-hover:scale-105"
             />
-          </a>
+          </button>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-sm font-medium text-white/70 hover:text-white transition-colors relative group"
+              <button
+                key={link.path}
+                onClick={() => handleNavClick(link.path)}
+                className={`text-sm font-medium transition-colors relative group ${link.isRoute && location.pathname === link.path ? 'text-white' : 'text-white/70 hover:text-white'} bg-transparent border-none cursor-pointer`}
               >
                 {t(link.labelKey)}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-500 transition-all group-hover:w-full"></span>
-              </a>
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-500 transition-all group-hover:w-full" style={{ width: link.isRoute && location.pathname === link.path ? '100%' : undefined }}></span>
+              </button>
             ))}
           </div>
 
@@ -66,12 +82,12 @@ export default function Navbar() {
               {t('lang-toggle')}
             </button>
 
-            <a
-              href="#contact"
-              className="hidden md:inline-flex items-center justify-center px-5 py-2 bg-brand-500 text-white rounded-full text-sm font-semibold shadow-glow hover:bg-brand-600 transition-all"
+            <button
+              onClick={() => handleNavClick('#contact')}
+              className="hidden md:inline-flex items-center justify-center px-5 py-2 bg-brand-500 text-white rounded-full text-sm font-semibold shadow-glow hover:bg-brand-600 transition-all border-none cursor-pointer"
             >
               {t('nav-cta')}
-            </a>
+            </button>
 
             {/* Mobile menu button */}
             <button
@@ -89,22 +105,26 @@ export default function Navbar() {
           <div className="md:hidden mt-4 pb-4 border-t border-white/10">
             <div className="flex flex-col space-y-4 pt-4">
               {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="text-sm font-medium text-white/70 hover:text-white transition-colors"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                <button
+                  key={link.path}
+                  onClick={() => {
+                    handleNavClick(link.path);
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="text-sm font-medium text-white/70 hover:text-white transition-colors text-left bg-transparent border-none cursor-pointer"
                 >
                   {t(link.labelKey)}
-                </a>
+                </button>
               ))}
-              <a
-                href="#contact"
-                className="inline-flex items-center justify-center px-5 py-2 bg-brand-500 text-white rounded-full text-sm font-semibold"
-                onClick={() => setIsMobileMenuOpen(false)}
+              <button
+                onClick={() => {
+                  handleNavClick('#contact');
+                  setIsMobileMenuOpen(false);
+                }}
+                className="inline-flex items-center justify-center px-5 py-2 bg-brand-500 text-white rounded-full text-sm font-semibold border-none cursor-pointer"
               >
                 {t('nav-cta')}
-              </a>
+              </button>
             </div>
           </div>
         )}

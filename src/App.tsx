@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import ServicesTimeline from "@/components/ServicesTimeline";
@@ -9,10 +10,10 @@ import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import Background from "@/components/Background";
+import ServicesPage from "@/components/ServicesPage";
 
-function App() {
+function HomePage() {
   useEffect(() => {
-    // Intersection Observer for reveal animations
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -28,39 +29,53 @@ function App() {
       observer.observe(el);
     });
 
-     // Smooth scroll for anchor links
-     document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-       anchor.addEventListener("click", (e) => {
-         e.preventDefault();
-         const href = (e.currentTarget as HTMLAnchorElement).getAttribute("href");
-         if (href) {
-           const target = document.querySelector(href);
-           if (target) {
-             target.scrollIntoView({
-               behavior: "smooth",
-               block: "start",
-             });
-           }
-         }
-       });
-     });
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener("click", (e) => {
+        e.preventDefault();
+        const href = (e.currentTarget as HTMLAnchorElement).getAttribute("href");
+        if (href) {
+          const target = document.querySelector(href);
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        }
+      });
+    });
 
     return () => observer.disconnect();
   }, []);
 
   return (
+    <main>
+      <Hero />
+      <ServicesTimeline />
+      <WhyUs />
+      <Process />
+      <Pricing />
+      <Testimonials />
+      <Contact />
+    </main>
+  );
+}
+
+function App() {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
+  return (
     <div className="min-h-screen bg-transparent text-white">
       <Background />
       <Navbar />
-      <main>
-        <Hero />
-        <ServicesTimeline />
-        <WhyUs />
-        <Process />
-        <Pricing />
-        <Testimonials />
-        <Contact />
-      </main>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/services" element={<ServicesPage />} />
+      </Routes>
       <Footer />
     </div>
   );
