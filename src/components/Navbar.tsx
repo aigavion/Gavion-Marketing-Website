@@ -29,10 +29,7 @@ export default function Navbar() {
 
   const handleNavClick = (path: string) => {
     if (path.startsWith('#')) {
-      const element = document.querySelector(path);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      window.location.href = '/#/' + path.substring(1);
     } else {
       navigate(path);
     }

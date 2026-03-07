@@ -1,4 +1,5 @@
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useNavigate } from "react-router-dom";
 import { MessageSquare, Phone, Target, Zap, Globe, ArrowRight, CheckCircle, Users, Calendar, Mail, FileText, BarChart3, Cog, Rocket, Palette, Clock, TrendingUp } from "lucide-react";
 
 interface WorkflowStep {
@@ -154,6 +155,7 @@ function WorkflowDiagram({ workflow, lang }: { workflow: ServiceWorkflow; lang: 
 
 export default function ServicesPage() {
   const { lang } = useLanguage();
+  const navigate = useNavigate();
 
   return (
     <main className="pt-28 pb-16">
@@ -214,13 +216,13 @@ export default function ServicesPage() {
               : "Start your AI journey today. Our team guides you every step of the way."
             }
           </p>
-          <a
-            href="#contact"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-brand-500 hover:bg-brand-600 text-white rounded-full font-semibold transition-all shadow-glow"
+          <button
+            onClick={() => navigate('/', { state: { scrollToContact: true } })}
+            className="inline-flex items-center gap-2 px-8 py-4 bg-brand-500 hover:bg-brand-600 text-white rounded-full font-semibold transition-all shadow-glow border-none cursor-pointer"
           >
             {lang === 'fr' ? "Commencer" : "Get Started"}
             <ArrowRight className="w-5 h-5" />
-          </a>
+          </button>
         </div>
       </section>
     </main>

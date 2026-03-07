@@ -65,7 +65,21 @@ function App() {
   const location = useLocation();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    if (!location.hash && !(location.state as any)?.scrollToContact) {
+      window.scrollTo(0, 0);
+    }
+  }, [location.pathname]);
+
+  useEffect(() => {
+    const state = location.state as any;
+    if (state?.scrollToContact) {
+      setTimeout(() => {
+        const target = document.querySelector('#contact');
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    }
   }, [location.pathname]);
 
   return (
