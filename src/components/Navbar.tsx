@@ -21,15 +21,21 @@ export default function Navbar() {
   const navLinks = [
     { path: "/services", labelKey: "nav-services", isRoute: true },
     { path: "#why-us", labelKey: "nav-why", isRoute: false },
-    { path: "#process", labelKey: "nav-pricing", isRoute: false },
+    { path: "#process", labelKey: "nav-process", isRoute: false },
     { path: "#pricing", labelKey: "nav-pricing", isRoute: false },
-    { path: "#testimonials", labelKey: "nav-testimonials", isRoute: false },
     { path: "#contact", labelKey: "nav-contact", isRoute: false },
   ];
 
   const handleNavClick = (path: string) => {
     if (path.startsWith('#')) {
-      window.location.href = '/#/' + path.substring(1);
+      navigate('/');
+      setTimeout(() => {
+        const targetId = path.substring(1);
+        const element = document.getElementById(targetId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
     } else {
       navigate(path);
     }

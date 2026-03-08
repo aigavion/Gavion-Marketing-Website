@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useChat } from "@/contexts/ChatContext";
 
 interface ChatMessage {
   id: number;
@@ -87,12 +88,11 @@ Contact: hello@gavion.ai | +1 (514) 555-0123`
 
 export default function Hero() {
   const { t, lang } = useLanguage();
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const { messages, setMessages, messageIdRef } = useChat();
   const [inputText, setInputText] = useState("");
   const [isConnected] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const messageIdRef = useRef(0);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -154,6 +154,8 @@ export default function Hero() {
   const handleSend = async () => {
     if (!inputText.trim() || isLoading) return;
 
+    const scrollY = window.scrollY;
+
     const userMessage: ChatMessage = {
       id: ++messageIdRef.current,
       text: inputText,
@@ -165,6 +167,10 @@ export default function Hero() {
     setInputText("");
     setIsLoading(true);
 
+    setTimeout(() => {
+      window.scrollTo(0, scrollY);
+    }, 10);
+
     try {
       const aiResponse = await callOpenRouter(messageToSend, lang);
       const botMessage: ChatMessage = {
@@ -173,6 +179,9 @@ export default function Hero() {
         from: "bot",
       };
       setMessages((prev) => [...prev, botMessage]);
+      setTimeout(() => {
+        window.scrollTo(0, scrollY);
+      }, 10);
     } catch (error) {
       const errorMessage: ChatMessage = {
         id: ++messageIdRef.current,
@@ -183,6 +192,9 @@ export default function Hero() {
       };
       setMessages((prev) => [...prev, errorMessage]);
       console.error("Chat error:", error);
+      setTimeout(() => {
+        window.scrollTo(0, scrollY);
+      }, 10);
     } finally {
       setIsLoading(false);
     }
@@ -270,14 +282,7 @@ export default function Hero() {
                   <div ref={messagesEndRef} />
                 </div>
                 <div className="p-4 bg-dark-800/50 border-t border-white/5">
-                  <form 
-                    onSubmit={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      handleSend();
-                    }}
-                    className="flex gap-3"
-                  >
+                  <div className="flex gap-3">
                     <input
                       ref={inputRef}
                       type="text"
@@ -288,15 +293,16 @@ export default function Hero() {
                       placeholder={t('chat-placeholder')}
                     />
                     <button 
-                      type="submit"
+                      type="button"
                       disabled={!inputText.trim() || isLoading}
+                      onClick={handleSend}
                       className="bg-brand-500 hover:bg-brand-600 disabled:opacity-50 disabled:cursor-not-allowed text-white w-12 h-12 rounded-full flex items-center justify-center transition-all active:scale-95 shadow-glow"
                     >
                       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
                       </svg>
                     </button>
-                  </form>
+                  </div>
                 </div>
               </div>
             </div>

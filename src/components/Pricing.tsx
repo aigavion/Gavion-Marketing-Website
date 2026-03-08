@@ -4,29 +4,29 @@ const plans = [
   {
     nameKey: "plan-1-name",
     descKey: "plan-1-desc",
-    price: 199,
+    price: 249,
     setupFeeKey: "plan-1-setup",
-    featuresKeys: ["plan-1-1", "plan-1-2", "plan-1-3", "plan-1-4", "plan-1-5", "plan-1-6", "plan-1-7"],
+    featuresKeys: ["plan-1-1", "plan-1-2", "plan-1-3", "plan-1-4", "plan-1-5", "plan-1-6"],
     highlighted: false,
     buttonTextKey: "get-started",
   },
   {
     nameKey: "plan-2-name",
     descKey: "plan-2-desc",
-    price: 399,
+    price: 449,
     setupFeeKey: "plan-2-setup",
-    featuresKeys: ["plan-2-1", "plan-2-2", "plan-2-3", "plan-2-4", "plan-2-5", "plan-2-6", "plan-2-7"],
+    featuresKeys: ["plan-2-1", "plan-2-2", "plan-2-3", "plan-2-4", "plan-2-5", "plan-2-6", "plan-2-7", "plan-2-8"],
     highlighted: true,
     buttonTextKey: "get-started",
   },
   {
     nameKey: "plan-3-name",
     descKey: "plan-3-desc",
-    price: 799,
+    price: 999,
     setupFeeKey: "plan-3-setup",
-    featuresKeys: ["plan-3-1", "plan-3-2", "plan-3-3", "plan-3-4", "plan-3-5", "plan-3-6", "plan-3-7"],
+    featuresKeys: ["plan-3-1", "plan-3-2", "plan-3-3", "plan-3-4", "plan-3-5", "plan-3-6", "plan-3-7", "plan-3-8"],
     highlighted: false,
-    buttonTextKey: "contact-sales",
+    buttonTextKey: "get-started",
   },
 ];
 
@@ -54,14 +54,14 @@ export default function Pricing() {
             >
               {plan.highlighted && (
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-brand-500 text-white text-xs font-bold px-4 py-1 rounded-full shadow-sm">
-                  Most Popular
+                  {t('most-popular')}
                 </div>
               )}
               <h3 className="text-2xl font-bold text-white mb-2">{t(plan.nameKey)}</h3>
               <p className="text-white/60 text-sm mb-6">{t(plan.descKey)}</p>
               <div className="mb-6">
                 <span className="text-4xl font-bold text-brand-500">${plan.price}</span>
-                <span className="text-white/60"> {t('per-month')}</span>
+                <span className="text-white/60"> {t('per-month-cad')}</span>
               </div>
               <p className="text-sm text-white/60 mt-2">{t(plan.setupFeeKey)}</p>
               <ul className="space-y-3 mb-8 text-sm text-white/70">
