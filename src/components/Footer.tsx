@@ -1,4 +1,5 @@
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const { t } = useLanguage();
@@ -18,8 +19,8 @@ const Footer = () => {
             <p className="text-white/60 text-sm mt-2">{t('footer-copyright')}</p>
           </div>
           <div className="flex space-x-6">
-            <a href="#" className="text-white/60 hover:text-brand-500 transition-colors">{t('footer-privacy')}</a>
-            <a href="#" className="text-white/60 hover:text-brand-500 transition-colors">{t('footer-terms')}</a>
+            <Link to="/privacy" className="text-white/60 hover:text-brand-500 transition-colors">{t('footer-privacy')}</Link>
+            <Link to="/terms" className="text-white/60 hover:text-brand-500 transition-colors">{t('footer-terms')}</Link>
             <a href="#" className="text-white/60 hover:text-brand-500 transition-colors">{t('footer-contact')}</a>
           </div>
         </div>

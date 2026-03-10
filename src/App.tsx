@@ -10,6 +10,8 @@ import Pricing from "@/components/Pricing";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import ServicesPage from "@/components/ServicesPage";
+import TermsPage from "@/components/TermsPage";
+import PrivacyPage from "@/components/PrivacyPage";
 import ChatWidget from "@/components/ChatWidget";
 import { ChatProvider } from "@/contexts/ChatContext";
 
@@ -66,10 +68,12 @@ function AppContent() {
     <div className="min-h-screen bg-transparent text-white">
       <Background />
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/services" element={<ServicesPage />} />
-      </Routes>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/services" element={<ServicesPage />} />
+          <Route path="/terms" element={<TermsPage />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
+        </Routes>
       <Footer />
     </div>
   );

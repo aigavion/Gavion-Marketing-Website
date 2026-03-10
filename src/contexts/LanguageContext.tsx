@@ -44,7 +44,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
       );
     }
 
-    const translation = langTranslations[key as keyof typeof translations.en];
+    const translation = (langTranslations as Record<string, string>)[key];
     if (!translation) {
       console.warn(`Missing translation for key: ${key} in ${lang}`);
       return key;
