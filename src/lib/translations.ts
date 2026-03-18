@@ -8,6 +8,7 @@ export const translations = {
     "nav-testimonials": "Testimonials",
     "nav-contact": "Contact",
     "nav-cta": "Get Started",
+    "nav-login": "Log In",
     "lang-toggle": "Français",
 
     // Hero Section
@@ -298,6 +299,7 @@ export const translations = {
     "nav-testimonials": "Témoignages",
     "nav-contact": "Contact",
     "nav-cta": "Commencer",
+    "nav-login": "Connexion",
     "lang-toggle": "English",
 
     // Hero Section

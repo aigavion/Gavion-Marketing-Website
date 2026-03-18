@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, User } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Navbar() {
@@ -85,12 +85,21 @@ export default function Navbar() {
               {t('lang-toggle')}
             </button>
 
-            <button
-              onClick={() => handleNavClick('#contact')}
-              className="hidden md:inline-flex items-center justify-center px-5 py-2 bg-brand-500 text-white rounded-full text-sm font-semibold shadow-glow hover:bg-brand-600 transition-all border-none cursor-pointer"
-            >
-              {t('nav-cta')}
-            </button>
+            <div className="hidden md:flex flex-col items-center gap-1">
+              <button
+                onClick={() => handleNavClick('#contact')}
+                className="inline-flex items-center justify-center px-5 py-2 bg-brand-500 text-white rounded-full text-sm font-semibold shadow-glow hover:bg-brand-600 transition-all border-none cursor-pointer"
+              >
+                {t('nav-cta')}
+              </button>
+              <button
+                onClick={() => alert('Dashboard coming soon!')}
+                className="inline-flex items-center gap-1.5 px-4 py-1 text-xs font-medium text-white/60 hover:text-white transition-colors bg-transparent border-none cursor-pointer"
+              >
+                <User size={14} />
+                {t('nav-login')}
+              </button>
+            </div>
 
             {/* Mobile menu button */}
             <button
@@ -127,6 +136,16 @@ export default function Navbar() {
                 className="inline-flex items-center justify-center px-5 py-2 bg-brand-500 text-white rounded-full text-sm font-semibold border-none cursor-pointer"
               >
                 {t('nav-cta')}
+              </button>
+              <button
+                onClick={() => {
+                  alert('Dashboard coming soon!');
+                  setIsMobileMenuOpen(false);
+                }}
+                className="inline-flex items-center gap-2 text-sm font-medium text-white/60 hover:text-white transition-colors text-left bg-transparent border-none cursor-pointer"
+              >
+                <User size={16} />
+                {t('nav-login')}
               </button>
             </div>
           </div>
