@@ -1,5 +1,6 @@
+import { useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { MessageSquare, Phone, Target, Zap, Globe, ArrowRight, CheckCircle, Users, Calendar, Mail, FileText, BarChart3, Cog, Rocket, Palette, Clock, TrendingUp } from "lucide-react";
 
 interface WorkflowStep {
@@ -17,7 +18,6 @@ interface ServiceWorkflow {
   description: string;
   descriptionFr: string;
   steps: WorkflowStep[];
-  color: string;
 }
 
 const servicesWorkflows: ServiceWorkflow[] = [
@@ -27,7 +27,6 @@ const servicesWorkflows: ServiceWorkflow[] = [
     titleFr: "Chatbot IA pour Site Web",
     description: "A 24/7 intelligent chatbot that engages visitors, qualifies leads, and answers FAQs in natural conversation. Bilingual EN/FR, trained on your documents.",
     descriptionFr: "Un chatbot intelligent 24/7 qui engage les visiteurs, qualifie les prospects et répond aux FAQ en conversation naturelle. Bilingue EN/FR, formé sur vos documents.",
-    color: "from-orange-500 to-red-500",
     steps: [
       { label: "Visitor Arrives", labelFr: "Visiteur Arrive", description: "A visitor lands on your website and the AI detects their presence.", descriptionFr: "Un visiteur arrive sur votre site et l'IA détecte sa présence.", icon: Users },
       { label: "AI Greets", labelFr: "IA Accueille", description: "The chatbot initiates a friendly, personalized greeting in their language.", descriptionFr: "Le chatbot initie un accueil amical et personnalisé dans leur langue.", icon: MessageSquare },
@@ -42,7 +41,6 @@ const servicesWorkflows: ServiceWorkflow[] = [
     titleFr: "Assistant de Bureau IA",
     description: "Automated call handling and appointment scheduling that keeps your calendar full. Integrates with Google Calendar, email, and SMS for seamless operations.",
     descriptionFr: "Gestion automatisée des appels et prise de rendez-vous qui garde votre calendrier plein. Intègre Google Calendar, email et SMS pour des opérations fluides.",
-    color: "from-blue-500 to-cyan-500",
     steps: [
       { label: "Call/Email Received", labelFr: "Appel/Email Reçu", description: "A new call or email comes in and is routed to the AI.", descriptionFr: "Un nouvel appel ou email arrive et est routé vers l'IA.", icon: Phone },
       { label: "AI Handles Request", labelFr: "IA Gère la Demande", description: "The AI understands the request using natural language processing.", descriptionFr: "L'IA comprend la demande en utilisant le traitement du langage naturel.", icon: Cog },
@@ -57,7 +55,6 @@ const servicesWorkflows: ServiceWorkflow[] = [
     titleFr: "Qualification de Prospects",
     description: "Automated prospecting and data enrichment that ensures you only talk to qualified, high-intent leads. Web research, CRM integration, and real-time scoring.",
     descriptionFr: "Prospection automatisée et enrichissement de données pour ne parler qu'aux prospects qualifiés. Recherche web, intégration CRM et scoring en temps réel.",
-    color: "from-green-500 to-emerald-500",
     steps: [
       { label: "Lead Enters", labelFr: "Prospect Entre", description: "A new lead enters your system via form, chat, or import.", descriptionFr: "Un nouveau prospect entre dans votre système via formulaire, chat ou import.", icon: Users },
       { label: "AI Researches", labelFr: "IA Recherche", description: "The AI gathers data about the lead from web sources and social media.", descriptionFr: "L'IA recueille des données sur le prospect à partir de sources web et réseaux sociaux.", icon: Globe },
@@ -72,7 +69,6 @@ const servicesWorkflows: ServiceWorkflow[] = [
     titleFr: "Automatisation des Flux",
     description: "Connect AI to your existing tools with Zapier, Make.com, n8n, and custom API connectors. Process optimization and continuous monitoring included.",
     descriptionFr: "Connectez l'IA à vos outils existants avec Zapier, Make.com, n8n et connecteurs API personnalisés. Optimisation des processus et surveillance continues incluses.",
-    color: "from-purple-500 to-pink-500",
     steps: [
       { label: "Trigger Event", labelFr: "Événement Déclencheur", description: "A specific event starts the workflow (new lead, form submit, etc.).", descriptionFr: "Un événement spécifique déclenche le flux (nouveau prospect, soumission de formulaire, etc.).", icon: Zap },
       { label: "AI Processes", labelFr: "IA Traite", description: "The AI analyzes the data and determines the appropriate action.", descriptionFr: "L'IA analyse les données et détermine l'action appropriée.", icon: Cog },
@@ -87,7 +83,6 @@ const servicesWorkflows: ServiceWorkflow[] = [
     titleFr: "Conception Web",
     description: "Modern, responsive website design that captures your brand and converts visitors into customers. Fast loading, SEO optimized, with brand-aligned visuals.",
     descriptionFr: "Conception de sites web modernes et réactifs qui capturent votre marque et convertissent les visiteurs en clients. Chargement rapide, SEO optimisé, visuels alignés.",
-    color: "from-yellow-500 to-orange-500",
     steps: [
       { label: "Discovery", labelFr: "Découverte", description: "We learn about your business, goals, audience, and competitors.", descriptionFr: "Nous découvrons votre entreprise, vos objectifs, votre public et vos concurrents.", icon: Users },
       { label: "Design Mockup", labelFr: "Maquette Design", description: "We create wireframes and visual designs for your approval.", descriptionFr: "Nous créons des maquettes et designs visuels pour votre approbation.", icon: Palette },
@@ -99,50 +94,31 @@ const servicesWorkflows: ServiceWorkflow[] = [
 ];
 
 function WorkflowDiagram({ workflow, lang }: { workflow: ServiceWorkflow; lang: string }) {
-  const arrowColorClass = () => {
-    const colors = [
-      'text-orange-400',
-      'text-blue-400',
-      'text-green-400',
-      'text-purple-400',
-      'text-yellow-400'
-    ];
-    return colors[workflow.id - 1] || 'text-white/60';
-  };
-
-  const getScrollbarClass = () => {
-    if (workflow.color.includes('orange')) return 'scrollbar-orange';
-    if (workflow.color.includes('blue')) return 'scrollbar-blue';
-    if (workflow.color.includes('green')) return 'scrollbar-green';
-    if (workflow.color.includes('purple')) return 'scrollbar-purple';
-    return 'scrollbar-yellow';
-  };
-
   return (
     <div className="py-8">
-      <div className={`flex flex-nowrap items-stretch justify-start gap-2 md:gap-3 overflow-x-auto pb-6 px-2 ${getScrollbarClass()}`}>
+      <div className="flex flex-nowrap items-stretch justify-start gap-2 md:gap-3 overflow-x-auto pb-6 px-2">
         {workflow.steps.map((step, index) => (
           <div key={index} className="flex items-center flex-shrink-0">
             <div className="flex flex-col items-center">
-              <div className="mb-1 text-base font-bold text-white/60 uppercase tracking-wider">
+              <div className="mb-1 text-base font-bold text-white/40 uppercase tracking-wider">
                 {lang === 'fr' ? `Étape ${index + 1}` : `Step ${index + 1}`}
               </div>
-              <div className={`w-44 h-44 md:w-48 md:h-44 rounded-2xl bg-gradient-to-br ${workflow.color} p-[3px] transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_0_30px_rgba(255,107,53,0.3)]`}>
-                <div className="w-full h-full bg-dark-900 rounded-xl flex flex-col items-center justify-start pt-1 gap-1 border border-white/10 shadow-inner">
-                  <div className={`p-1.5 rounded-full bg-gradient-to-br ${workflow.color} shadow-lg`}>
+              <div className="w-44 h-44 md:w-48 md:h-44 rounded-2xl bg-gradient-to-br from-orange-500 to-orange-400 p-[2px] transition-all duration-300">
+                <div className="w-full h-full bg-base rounded-xl flex flex-col items-center justify-start pt-1 gap-1 border border-white/10 shadow-inner">
+                  <div className="p-1.5 rounded-full bg-gradient-to-br from-orange-500 to-orange-400 shadow-lg">
                     <step.icon className="w-4 h-4 md:w-5 md:h-5 text-white" />
                   </div>
                   <span className="text-xl text-white font-bold text-center px-2 leading-tight">
                     {lang === 'fr' ? step.labelFr : step.label}
                   </span>
-                  <span className="text-sm text-white/70 text-center px-2 leading-tight mt-1">
+                  <span className="text-sm text-white/50 text-center px-2 leading-tight mt-1">
                     {lang === 'fr' ? step.descriptionFr : step.description}
                   </span>
                 </div>
               </div>
             </div>
             {index < workflow.steps.length - 1 && (
-              <div className={`flex-shrink-0 flex items-center justify-center h-44 w-8 -ml-1 ${arrowColorClass()}`}>
+              <div className="flex-shrink-0 flex items-center justify-center h-44 w-8 -ml-1 text-orange-400">
                 <ArrowRight className="w-6 h-6 md:w-8 md:h-8 opacity-70 animate-pulse translate-y-[10px] translate-x-[5px]" />
               </div>
             )}
@@ -156,15 +132,26 @@ function WorkflowDiagram({ workflow, lang }: { workflow: ServiceWorkflow; lang: 
 export default function ServicesPage() {
   const { lang } = useLanguage();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    const state = location.state as any;
+    if (state?.scrollToService) {
+      setTimeout(() => {
+        const el = document.getElementById(`service-${state.scrollToService}`);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 200);
+    }
+  }, [location.state]);
 
   return (
     <main className="pt-28 pb-16">
       <section className="container mx-auto px-6 max-w-7xl mb-16">
         <div className="text-center max-w-4xl mx-auto">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-6">
             {lang === 'fr' ? "Nos Services" : "Our Services"}
           </h1>
-          <p className="text-xl text-white/70 leading-relaxed">
+          <p className="text-xl text-white/50 leading-relaxed">
             {lang === 'fr'
               ? "Découvrez comment nos solutions IA transforment votre entreprise. Chaque service est conçu pour automatiser, optimiser et développer vos opérations."
               : "Discover how our AI solutions transform your business. Each service is designed to automate, optimize, and grow your operations."
@@ -177,25 +164,26 @@ export default function ServicesPage() {
         {servicesWorkflows.map((workflow) => (
           <div
             key={workflow.id}
-            className="bg-dark-800/50 rounded-3xl p-6 md:p-10 border border-white/5"
+            id={`service-${workflow.id}`}
+            className="bg-surface/60 rounded-3xl p-6 md:p-10 border border-white/5"
           >
             <div className="flex flex-col lg:flex-row gap-8 lg:items-start">
               <div className="lg:w-1/3">
-                <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r ${workflow.color} mb-4`}>
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-orange-500 to-orange-400 mb-4">
                   <span className="text-white text-sm font-medium">
                     0{workflow.id}
                   </span>
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
+                <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-4">
                   {lang === 'fr' ? workflow.titleFr : workflow.title}
                 </h2>
-                <p className="text-white/70 leading-relaxed">
+                <p className="text-white/50 leading-relaxed">
                   {lang === 'fr' ? workflow.descriptionFr : workflow.description}
                 </p>
               </div>
-              
+
               <div className="lg:w-2/3">
-                <h3 className="text-sm font-medium text-white/50 uppercase tracking-wider mb-4">
+                <h3 className="text-sm font-medium text-white/40 uppercase tracking-wider mb-4">
                   {lang === 'fr' ? "Flux de Travail" : "Workflow"}
                 </h3>
                 <WorkflowDiagram workflow={workflow} lang={lang} />
@@ -206,11 +194,11 @@ export default function ServicesPage() {
       </section>
 
       <section className="container mx-auto px-6 max-w-4xl mt-20">
-        <div className="bg-gradient-to-br from-brand-500/20 to-orange-500/20 rounded-3xl p-8 md:p-12 border border-brand-500/30 text-center">
-          <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
+        <div className="bg-gradient-to-br from-orange-500/20 to-orange-400/20 rounded-3xl p-8 md:p-12 border border-orange-500/30 text-center">
+          <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-4">
             {lang === 'fr' ? "Prêt à Transformer Votre Entreprise?" : "Ready to Transform Your Business?"}
           </h2>
-          <p className="text-white/70 mb-8 max-w-2xl mx-auto">
+          <p className="text-white/50 mb-8 max-w-2xl mx-auto">
             {lang === 'fr'
               ? "Commencez votre parcours IA dès aujourd'hui. Notre équipe vous guide à chaque étape."
               : "Start your AI journey today. Our team guides you every step of the way."
@@ -218,7 +206,7 @@ export default function ServicesPage() {
           </p>
           <button
             onClick={() => navigate('/', { state: { scrollToContact: true } })}
-            className="inline-flex items-center gap-2 px-8 py-4 bg-brand-500 hover:bg-brand-600 text-white rounded-full font-semibold transition-all shadow-glow border-none cursor-pointer"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-400 hover:shadow-glow-lg text-white rounded-full font-semibold transition-all border-none cursor-pointer"
           >
             {lang === 'fr' ? "Commencer" : "Get Started"}
             <ArrowRight className="w-5 h-5" />

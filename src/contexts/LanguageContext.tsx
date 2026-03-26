@@ -40,7 +40,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
       // Replace <brand> tags with styled brand word (orange)
       return fallback.replace(
         /<brand>/g,
-        `<span class="text-brand-500">AI</span>`
+        `<span class="bg-gradient-to-r from-orange-500 to-orange-400 bg-clip-text text-transparent">AI</span>`
       );
     }
 
@@ -53,7 +53,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     const brandWord = lang === 'en' ? 'AI' : 'IA';
     return translation.replace(
       /<brand>/g,
-      `<span class="text-brand-500">${brandWord}</span>`
+      `<span class="bg-gradient-to-r from-orange-500 to-orange-400 bg-clip-text text-transparent">${brandWord}</span>`
     );
   };
 

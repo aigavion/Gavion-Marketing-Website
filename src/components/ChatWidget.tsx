@@ -114,7 +114,7 @@ export default function ChatWidget() {
 
   const callOpenRouter = async (userMessage: string, language: string): Promise<string> => {
     const apiKey = import.meta.env.VITE_OPENROUTER_API_KEY;
-    
+
     if (!apiKey) {
       throw new Error("API key not configured");
     }
@@ -153,7 +153,7 @@ export default function ChatWidget() {
     if (!inputText.trim() || isLoading) return;
 
     const scrollY = window.scrollY;
-    
+
     const userMessage: Message = {
       id: ++messageIdRef.current,
       text: inputText,
@@ -183,7 +183,7 @@ export default function ChatWidget() {
     } catch (error) {
       const errorMessage: Message = {
         id: ++messageIdRef.current,
-        text: lang === 'fr' 
+        text: lang === 'fr'
           ? "Désolé, j'ai des difficultés techniques. Veuillez réessayer ou nous contacter directement."
           : "Sorry, I'm having technical difficulties. Please try again or contact us directly.",
         from: 'bot'
@@ -239,22 +239,22 @@ export default function ChatWidget() {
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className={`fixed bottom-6 right-6 w-14 h-14 bg-brand-500 rounded-full flex items-center justify-center shadow-lg hover:bg-brand-600 transition-all z-50 ${isOpen || !showButton ? 'hidden' : 'flex'}`}
+        className={`fixed bottom-6 right-6 w-14 h-14 bg-gradient-to-r from-orange-500 to-orange-400 rounded-full flex items-center justify-center shadow-lg hover:shadow-glow transition-all z-50 ${isOpen || !showButton ? 'hidden' : 'flex'}`}
         aria-label="Open chat"
       >
         <MessageCircle className="w-7 h-7 text-white" />
       </button>
 
       {isOpen && (
-        <div className="fixed bottom-6 right-6 w-80 md:w-96 h-[500px] bg-dark-800 rounded-2xl shadow-2xl flex flex-col overflow-hidden z-50 border border-white/10">
-          <div className="flex items-center justify-between px-4 py-3 bg-dark-900 border-b border-white/10">
+        <div className="fixed bottom-6 right-6 w-80 md:w-96 h-[500px] bg-surface rounded-2xl shadow-2xl flex flex-col overflow-hidden z-50 border border-white/10">
+          <div className="flex items-center justify-between px-4 py-3 bg-base border-b border-white/10">
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 rounded-full bg-green-400 animate-pulse"></div>
               <span className="text-white font-medium text-sm">
                 Gavion AI Assistant
               </span>
             </div>
-            <button 
+            <button
               onClick={() => setIsOpen(false)}
               className="text-white/60 hover:text-white transition-colors"
             >
@@ -262,21 +262,21 @@ export default function ChatWidget() {
             </button>
           </div>
 
-          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-dark-900/50">
+          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-base/50">
             {messages.map((msg) => (
               <div key={msg.id} className={`flex items-start gap-2 ${msg.from === 'user' ? 'justify-end' : ''}`}>
                 {msg.from === 'bot' && (
                   <img src="/logo-chat.png" alt="Gavion" className="w-8 h-8 rounded-full flex-shrink-0 object-cover mt-1" style={{ animation: 'spin 7s linear infinite', animationDirection: 'reverse' }} />
                 )}
                 <div className={`rounded-2xl px-3 py-2 max-w-[80%] text-sm ${
-                  msg.from === 'bot' 
-                    ? 'bg-white/10 text-white rounded-tl-none' 
-                    : 'bg-brand-600 text-white rounded-tr-none'
+                  msg.from === 'bot'
+                    ? 'bg-white/5 text-white rounded-tl-none'
+                    : 'bg-gradient-to-r from-orange-500 to-orange-400 text-white rounded-tr-none'
                 }`}>
                   {msg.text}
                 </div>
                 {msg.from === 'user' && (
-                  <div className="w-7 h-7 rounded-full bg-dark-600 flex-shrink-0 flex items-center justify-center">
+                  <div className="w-7 h-7 rounded-full bg-surface-light flex-shrink-0 flex items-center justify-center">
                     <User className="w-4 h-4 text-white" />
                   </div>
                 )}
@@ -285,7 +285,7 @@ export default function ChatWidget() {
             {isLoading && (
               <div className="flex items-start gap-2">
                 <img src="/logo-chat.png" alt="Gavion" className="w-8 h-8 rounded-full flex-shrink-0 object-cover mt-1" style={{ animation: 'spin 7s linear infinite', animationDirection: 'reverse' }} />
-                <div className="rounded-2xl p-3 bg-white/10 text-white rounded-tl-none">
+                <div className="rounded-2xl p-3 bg-white/5 text-white rounded-tl-none">
                   <div className="flex gap-1">
                     <div className="w-2 h-2 bg-white/60 rounded-full animate-bounce" style={{ animationDelay: "0ms" }}></div>
                     <div className="w-2 h-2 bg-white/60 rounded-full animate-bounce" style={{ animationDelay: "150ms" }}></div>
@@ -297,7 +297,7 @@ export default function ChatWidget() {
             <div ref={messagesEndRef} />
           </div>
 
-          <div className="p-3 bg-dark-800 border-t border-white/10">
+          <div className="p-3 bg-surface border-t border-white/10">
             <div className="flex gap-2">
               <input
                 ref={inputRef}
@@ -306,13 +306,13 @@ export default function ChatWidget() {
                 onChange={(e) => setInputText(e.target.value)}
                 onKeyDown={handleKeyDown}
                 placeholder={lang === 'fr' ? "Tapez un message..." : "Type a message..."}
-                className="flex-1 px-3 py-2 bg-white/5 border border-white/10 rounded-full text-white placeholder-white/40 text-sm focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none transition-all"
+                className="flex-1 px-3 py-2 bg-white/5 border border-white/10 rounded-full text-white placeholder-white/30 text-sm focus:border-orange-500 focus:ring-1 focus:ring-orange-500 outline-none transition-all"
               />
               <button
                 type="button"
                 disabled={!inputText.trim() || isLoading}
                 onClick={handleSend}
-                className="bg-brand-500 hover:bg-brand-600 disabled:opacity-50 disabled:cursor-not-allowed text-white w-10 h-10 rounded-full flex items-center justify-center transition-all"
+                className="bg-gradient-to-r from-orange-500 to-orange-400 hover:shadow-glow disabled:opacity-50 disabled:cursor-not-allowed text-white w-10 h-10 rounded-full flex items-center justify-center transition-all"
               >
                 <Send className="w-4 h-4" />
               </button>

@@ -27,6 +27,7 @@ export default function Navbar() {
   ];
 
   const handleNavClick = (path: string) => {
+    setIsMobileMenuOpen(false);
     if (path.startsWith('#')) {
       navigate('/');
       setTimeout(() => {
@@ -41,23 +42,21 @@ export default function Navbar() {
     }
   };
 
-  
-
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-0 ${
-        isScrolled ? "bg-dark-900/80 backdrop-blur-md border-b border-white/5" : "bg-transparent"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? "bg-base/90 backdrop-blur-xl border-b border-white/10"
+          : "bg-base/70 backdrop-blur-xl"
       }`}
     >
       <div className="container mx-auto px-6 max-w-7xl">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between h-16">
           <button onClick={() => navigate('/')} className="relative group bg-transparent border-none cursor-pointer" aria-label="Gavion Home">
             <img
               src="/GAVION_logo_transparent_4096w.png"
               alt="Gavion"
-              width={320}
-              height={100}
-              className="h-24 w-auto transition-transform group-hover:scale-105"
+              className="h-14 w-auto transition-transform group-hover:scale-105"
             />
           </button>
 
@@ -67,19 +66,28 @@ export default function Navbar() {
               <button
                 key={link.path}
                 onClick={() => handleNavClick(link.path)}
-                className={`text-sm font-medium transition-colors relative group ${link.isRoute && location.pathname === link.path ? 'text-white' : 'text-white/70 hover:text-white'} bg-transparent border-none cursor-pointer`}
+                className={`text-sm font-medium transition-colors relative group bg-transparent border-none cursor-pointer ${
+                  link.isRoute && location.pathname === link.path
+                    ? 'text-white'
+                    : 'text-white/60 hover:text-white'
+                }`}
               >
                 {t(link.labelKey)}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-500 transition-all group-hover:w-full" style={{ width: link.isRoute && location.pathname === link.path ? '100%' : undefined }}></span>
+                <span
+                  className={`absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-gradient-to-r from-orange-500 to-orange-400 transition-opacity ${
+                    link.isRoute && location.pathname === link.path
+                      ? 'opacity-100'
+                      : 'opacity-0 group-hover:opacity-100'
+                  }`}
+                />
               </button>
             ))}
           </div>
 
           <div className="flex items-center space-x-3">
-            {/* Language Toggle Button */}
             <button
               onClick={toggleLanguage}
-              className="px-4 py-2 text-sm font-medium rounded-lg border border-white/20 hover:border-brand-500 hover:text-brand-500 transition-all"
+              className="px-3 py-1.5 text-xs font-medium rounded-lg border border-white/20 text-white/60 hover:border-white/40 hover:text-white transition-all bg-transparent cursor-pointer"
               aria-label="Toggle language"
             >
               {t('lang-toggle')}
@@ -87,14 +95,13 @@ export default function Navbar() {
 
             <button
               onClick={() => handleNavClick('#contact')}
-              className="hidden md:inline-flex items-center justify-center px-5 py-2 bg-brand-500 text-white rounded-full text-sm font-semibold shadow-glow hover:bg-brand-600 transition-all border-none cursor-pointer"
+              className="hidden md:inline-flex items-center justify-center px-5 py-2 bg-gradient-to-r from-orange-500 to-orange-400 text-white rounded-full text-sm font-semibold shadow-glow hover:shadow-glow-lg transition-all border-none cursor-pointer"
             >
               {t('nav-cta')}
             </button>
 
-            {/* Mobile menu button */}
             <button
-              className="md:hidden text-white"
+              className="md:hidden text-white bg-transparent border-none cursor-pointer"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle menu"
             >
@@ -105,26 +112,20 @@ export default function Navbar() {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 border-t border-white/10">
+          <div className="md:hidden pb-4 border-t border-white/10">
             <div className="flex flex-col space-y-4 pt-4">
               {navLinks.map((link) => (
                 <button
                   key={link.path}
-                  onClick={() => {
-                    handleNavClick(link.path);
-                    setIsMobileMenuOpen(false);
-                  }}
-                  className="text-sm font-medium text-white/70 hover:text-white transition-colors text-left bg-transparent border-none cursor-pointer"
+                  onClick={() => handleNavClick(link.path)}
+                  className="text-sm font-medium text-white/60 hover:text-white transition-colors text-left bg-transparent border-none cursor-pointer"
                 >
                   {t(link.labelKey)}
                 </button>
               ))}
               <button
-                onClick={() => {
-                  handleNavClick('#contact');
-                  setIsMobileMenuOpen(false);
-                }}
-                className="inline-flex items-center justify-center px-5 py-2 bg-brand-500 text-white rounded-full text-sm font-semibold border-none cursor-pointer"
+                onClick={() => handleNavClick('#contact')}
+                className="inline-flex items-center justify-center px-5 py-2 bg-gradient-to-r from-orange-500 to-orange-400 text-white rounded-full text-sm font-semibold border-none cursor-pointer"
               >
                 {t('nav-cta')}
               </button>

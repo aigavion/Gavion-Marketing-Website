@@ -63,7 +63,7 @@ function AppContent() {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen bg-transparent text-white">
+    <div className="min-h-screen bg-transparent text-white noise-overlay">
       <Background />
       <Navbar />
       <Routes>

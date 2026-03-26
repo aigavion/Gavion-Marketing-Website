@@ -211,28 +211,26 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden pt-20">
-      {/* Dark overlay */}
-      <div className="absolute inset-0 bg-transparent"></div>
-      
       {/* Ambient glow orbs */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-500/10 rounded-full blur-3xl animate-float"></div>
-      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-brand-500/5 rounded-full blur-3xl animate-float" style={{ animationDelay: "2s" }}></div>
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl animate-float"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-orange-500/5 rounded-full blur-3xl animate-float" style={{ animationDelay: "2s" }}></div>
 
       <div className="container mx-auto px-6 max-w-7xl relative z-10">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div className="text-center lg:text-left animate-fade-up">
-            <span className="inline-block px-4 py-1.5 rounded-full bg-brand-500/20 text-brand-500 text-xs font-semibold uppercase tracking-wide mb-6">
-              {t('hero-badge')}
+            <span className="inline-block px-4 py-1.5 rounded-full bg-gradient-to-r from-orange-500/20 to-orange-400/20 text-sm font-semibold uppercase tracking-wide mb-6">
+              <span className="gradient-text">{t('hero-badge')}</span>
             </span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white mb-6" dangerouslySetInnerHTML={{ __html: t('hero-title') }}>
+            {/* dangerouslySetInnerHTML renders trusted translation strings only (not user input) for <brand> tag styling */}
+            <h1 className="text-5xl lg:text-7xl font-extrabold leading-tight text-white mb-6" dangerouslySetInnerHTML={{ __html: t('hero-title') }}>
             </h1>
-            <p className="text-lg md:text-xl text-white/70 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+            <p className="text-lg md:text-xl text-white/60 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
               {t('hero-subtitle')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-10">
               <a
                 href="#process"
-                className="inline-flex items-center justify-center px-8 py-4 bg-brand-500 text-white rounded-full font-semibold hover:bg-brand-600 transition-all"
+                className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-400 text-white rounded-full font-semibold hover:shadow-glow-lg transition-all"
               >
                 {t('hero-cta-secondary')}
                 <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -242,35 +240,39 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Animated Chat Demo */}
+          {/* Chat Demo with animated gradient border */}
           <div className="relative animate-fade-up" style={{ animationDelay: "0.2s" }}>
-            <div className="glass-dark rounded-2xl p-1 shadow-soft transform lg:translate-x-8">
-              <div className="bg-dark-800/80 backdrop-blur rounded-xl overflow-hidden">
-                <div className="flex items-center justify-between px-4 py-3 bg-dark-900/50 border-b border-white/5">
+            <div className="gradient-border-animated rounded-2xl shadow-soft">
+              <div className="bg-surface/90 backdrop-blur-sm rounded-2xl overflow-hidden">
+                <div className="flex items-center justify-between px-4 py-3 bg-base/50 border-b border-white/5">
                   <div className="flex items-center gap-2">
-                    <div className={`w-3 h-3 rounded-full ${isConnected ? "bg-green-500 pulse-dot" : "bg-red-500"}`}></div>
+                    <div className={`w-2.5 h-2.5 rounded-full ${isConnected ? "bg-green-500" : "bg-red-500"}`}></div>
                     <span className="text-white font-medium text-sm">{t('chat-header')}</span>
                   </div>
-                  <span className="text-xs text-white/60">{isConnected ? t('chat-status') : (lang === 'fr' ? "● Hors ligne" : "● Offline")}</span>
+                  <span className="text-xs text-white/40">{isConnected ? t('chat-status') : (lang === 'fr' ? "Hors ligne" : "Offline")}</span>
                 </div>
-                <div className="h-80 overflow-y-auto p-4 space-y-4 bg-dark-900/30" id="chat-demo">
+                <div className="h-80 overflow-y-auto p-4 space-y-4 bg-base/30" id="chat-demo">
                   {messages.map((msg) => (
                     <div key={msg.id} className={`flex items-start gap-3 ${msg.from === "user" ? "justify-end" : ""}`}>
                       {msg.from === "bot" && (
-                      <img src="https://i.ibb.co/1YVxD2PT/LOGO-removebg-preview.png" alt="Gavion" className="w-8 h-8 rounded-full flex-shrink-0 object-cover mt-2" style={{ animation: 'spin 7s linear infinite', animationDirection: 'reverse' }} />
+                        <img src="https://i.ibb.co/1YVxD2PT/LOGO-removebg-preview.png" alt="Gavion" className="w-8 h-8 rounded-full flex-shrink-0 object-cover mt-2" style={{ animation: 'spin 7s linear infinite', animationDirection: 'reverse' }} />
                       )}
-                      <div className={`rounded-2xl p-3 max-w-[85%] text-sm leading-relaxed ${msg.from === "bot" ? "bg-white/10 text-white rounded-tl-none" : "bg-brand-600 text-white rounded-tr-none"}`}>
+                      <div className={`rounded-2xl p-3 max-w-[85%] text-sm leading-relaxed ${
+                        msg.from === "bot"
+                          ? "bg-white/5 text-white rounded-tl-none"
+                          : "bg-gradient-to-r from-orange-500 to-orange-400 text-white rounded-tr-none"
+                      }`}>
                         {msg.text}
                       </div>
                       {msg.from === "user" && (
-                        <div className="w-8 h-8 rounded-full bg-dark-600 flex-shrink-0 flex items-center justify-center text-white text-xs font-bold">U</div>
+                        <div className="w-8 h-8 rounded-full bg-surface-light flex-shrink-0 flex items-center justify-center text-white text-xs font-bold">U</div>
                       )}
                     </div>
                   ))}
                   {isLoading && (
                     <div className="flex items-start gap-3">
-<img src="https://i.ibb.co/1YVxD2PT/LOGO-removebg-preview.png" alt="Gavion" className="w-8 h-8 rounded-full flex-shrink-0 object-cover mt-2" style={{ animation: 'spin 7s linear infinite', animationDirection: 'reverse' }} />
-                      <div className="rounded-2xl p-3 bg-white/10 text-white rounded-tl-none">
+                      <img src="https://i.ibb.co/1YVxD2PT/LOGO-removebg-preview.png" alt="Gavion" className="w-8 h-8 rounded-full flex-shrink-0 object-cover mt-2" style={{ animation: 'spin 7s linear infinite', animationDirection: 'reverse' }} />
+                      <div className="rounded-2xl p-3 bg-white/5 text-white rounded-tl-none">
                         <div className="flex gap-1">
                           <div className="w-2 h-2 bg-white/60 rounded-full animate-bounce" style={{ animationDelay: "0ms" }}></div>
                           <div className="w-2 h-2 bg-white/60 rounded-full animate-bounce" style={{ animationDelay: "150ms" }}></div>
@@ -281,7 +283,7 @@ export default function Hero() {
                   )}
                   <div ref={messagesEndRef} />
                 </div>
-                <div className="p-4 bg-dark-800/50 border-t border-white/5">
+                <div className="p-4 bg-surface/50 border-t border-white/5">
                   <div className="flex gap-3">
                     <input
                       ref={inputRef}
@@ -289,14 +291,14 @@ export default function Hero() {
                       value={inputText}
                       onChange={(e) => setInputText(e.target.value)}
                       onKeyDown={handleKeyDown}
-                      className="flex-1 px-4 py-3 bg-white/5 border border-white/10 rounded-full text-white placeholder-white/40 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none transition-all"
+                      className="flex-1 px-4 py-3 bg-white/5 border border-white/10 rounded-full text-white placeholder-white/30 focus:border-orange-500 focus:ring-1 focus:ring-orange-500 outline-none transition-all"
                       placeholder={t('chat-placeholder')}
                     />
-                    <button 
+                    <button
                       type="button"
                       disabled={!inputText.trim() || isLoading}
                       onClick={handleSend}
-                      className="bg-brand-500 hover:bg-brand-600 disabled:opacity-50 disabled:cursor-not-allowed text-white w-12 h-12 rounded-full flex items-center justify-center transition-all active:scale-95 shadow-glow"
+                      className="bg-gradient-to-r from-orange-500 to-orange-400 hover:shadow-glow disabled:opacity-50 disabled:cursor-not-allowed text-white w-12 h-12 rounded-full flex items-center justify-center transition-all active:scale-95"
                     >
                       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>

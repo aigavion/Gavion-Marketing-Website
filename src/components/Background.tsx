@@ -39,7 +39,7 @@ export default function Background() {
           radius: Math.random() * 3 + 1,
           vx: (Math.random() - 0.5) * 0.3,
           vy: (Math.random() - 0.5) * 0.3,
-          opacity: Math.random() * 0.25 + 0.1,
+          opacity: Math.random() * 0.5 + 0.2,
         });
       }
     };
@@ -64,9 +64,9 @@ export default function Background() {
           particle.y,
           particle.radius * 3
         );
-        gradient.addColorStop(0, `rgba(100, 200, 255, ${particle.opacity})`);
-        gradient.addColorStop(0.5, `rgba(100, 200, 255, ${particle.opacity * 0.3})`);
-        gradient.addColorStop(1, "rgba(100, 200, 255, 0)");
+        gradient.addColorStop(0, `rgba(249, 115, 22, ${particle.opacity})`);
+        gradient.addColorStop(0.5, `rgba(249, 115, 22, ${particle.opacity * 0.3})`);
+        gradient.addColorStop(1, "rgba(249, 115, 22, 0)");
 
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.radius * 3, 0, Math.PI * 2);
@@ -75,7 +75,7 @@ export default function Background() {
 
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 255, ${particle.opacity * 0.5})`;
+        ctx.fillStyle = `rgba(255, 255, 255, ${particle.opacity})`;
         ctx.fill();
       });
 
@@ -89,7 +89,7 @@ export default function Background() {
             ctx.beginPath();
             ctx.moveTo(p1.x, p1.y);
             ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(100, 200, 255, ${0.05 * (1 - dist / 150)})`;
+            ctx.strokeStyle = `rgba(249, 115, 22, ${0.1 * (1 - dist / 150)})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
