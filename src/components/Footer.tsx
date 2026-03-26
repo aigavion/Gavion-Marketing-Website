@@ -1,4 +1,5 @@
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   const { t } = useLanguage();
@@ -22,8 +23,8 @@ export default function Footer() {
 
           {/* Nav Links */}
           <div className="flex flex-col space-y-2 md:items-center">
-            <a href="#" className="text-white/40 hover:text-white text-sm transition-colors">{t('footer-privacy')}</a>
-            <a href="#" className="text-white/40 hover:text-white text-sm transition-colors">{t('footer-terms')}</a>
+            <Link to="/privacy" className="text-white/40 hover:text-white text-sm transition-colors">{t('footer-privacy')}</Link>
+            <Link to="/terms" className="text-white/40 hover:text-white text-sm transition-colors">{t('footer-terms')}</Link>
           </div>
 
           {/* Contact Info */}

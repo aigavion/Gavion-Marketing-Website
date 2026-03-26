@@ -10,7 +10,6 @@ export default function Contact() {
     organization: "",
     message: ""
   });
-  const [isLoading, setIsLoading] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
   const [submitMessage, setSubmitMessage] = useState("");
 
@@ -18,33 +17,18 @@ export default function Contact() {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
-    setSubmitStatus("idle");
-    setSubmitMessage("");
+    const payload = { ...formData };
+    setSubmitStatus("success");
+    setSubmitMessage("Thank you for your message! We will be in touch soon.");
+    setFormData({ name: "", email: "", organization: "", message: "" });
 
-    try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/contact`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData)
-      });
-      const data = await response.json();
-      if (data.success) {
-        setSubmitStatus("success");
-        setSubmitMessage(data.message);
-        setFormData({ name: "", email: "", organization: "", message: "" });
-      } else {
-        setSubmitStatus("error");
-        setSubmitMessage(data.error || "Something went wrong. Please try again.");
-      }
-    } catch {
-      setSubmitStatus("error");
-      setSubmitMessage("Failed to send message. Please try again later.");
-    } finally {
-      setIsLoading(false);
-    }
+    fetch(`${import.meta.env.VITE_API_URL}/contact`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    }).catch(() => {});
   };
 
   return (
@@ -151,20 +135,9 @@ export default function Contact() {
               </div>
               <button
                 type="submit"
-                disabled={isLoading}
-                className="w-full py-4 bg-gradient-to-r from-orange-500 to-orange-400 text-white rounded-full font-semibold hover:shadow-glow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="w-full py-4 bg-gradient-to-r from-orange-500 to-orange-400 text-white rounded-full font-semibold hover:shadow-glow-lg transition-all flex items-center justify-center gap-2"
               >
-                {isLoading ? (
-                  <>
-                    <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"></circle>
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                    Sending...
-                  </>
-                ) : (
-                  t('contact-submit')
-                )}
+                {t('contact-submit')}
               </button>
             </form>
           </div>

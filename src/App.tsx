@@ -10,6 +10,8 @@ import Pricing from "@/components/Pricing";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import ServicesPage from "@/components/ServicesPage";
+import PrivacyPage from "@/components/PrivacyPage";
+import TermsPage from "@/components/TermsPage";
 import ChatWidget from "@/components/ChatWidget";
 import { ChatProvider } from "@/contexts/ChatContext";
 
@@ -69,6 +71,8 @@ function AppContent() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/services" element={<ServicesPage />} />
+        <Route path="/privacy" element={<PrivacyPage />} />
+        <Route path="/terms" element={<TermsPage />} />
       </Routes>
       <Footer />
     </div>
