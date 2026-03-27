@@ -26,3 +26,9 @@ npm-debug.log*
 # Backup files
 *.backup
 index.html.backup
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example
