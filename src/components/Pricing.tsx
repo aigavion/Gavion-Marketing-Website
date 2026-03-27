@@ -114,13 +114,13 @@ export default function Pricing() {
           <p className="text-lg text-white/60">{t('pricing-subtitle')}</p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-4 md:gap-6 lg:gap-8 max-w-5xl mx-auto">
           {plans.map((plan, index) => (
             <div
               key={index}
               className={`relative rounded-2xl border transition-all duration-300 reveal ${
                 plan.highlighted
-                  ? "md:scale-105"
+                  ? "lg:scale-105"
                   : "bg-surface/60 backdrop-blur-sm border-white/5 hover:border-white/10"
               } ${plan.highlighted ? "gradient-border-animated" : ""}`}
               style={{ animationDelay: `${0.1 * (index + 1)}s` }}
@@ -130,7 +130,7 @@ export default function Pricing() {
                   {t('most-popular')}
                 </div>
               )}
-              <div className={`relative z-10 p-8 ${plan.highlighted ? "bg-surface rounded-2xl" : ""}`}>
+              <div className={`relative z-10 p-5 sm:p-8 ${plan.highlighted ? "bg-surface rounded-2xl" : ""}`}>
                 <h3 className="text-2xl font-bold text-white mb-2">{t(plan.nameKey)}</h3>
                 <p className="text-white/40 text-sm mb-6">{t(plan.descKey)}</p>
                 <div className="mb-6">

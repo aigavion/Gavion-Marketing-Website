@@ -14,7 +14,7 @@ export default function Footer() {
           {/* Logo + Copyright */}
           <div>
             <img
-              src="/GAVION_logo_transparent_4096w.png"
+              src="/GAVION_logo_transparent_4096w.webp"
               alt="Gavion"
               className="h-10 w-auto mb-3"
             />

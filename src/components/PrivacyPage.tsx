@@ -37,7 +37,7 @@ const PrivacyPage = () => {
             <Shield className="w-4 h-4 text-orange-400" />
             <span className="text-sm font-medium text-orange-400">Your Data, Protected</span>
           </div>
-          <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-4 tracking-tight">
+          <h1 className="text-2xl sm:text-4xl md:text-6xl font-extrabold text-white mb-4 tracking-tight">
             {t("privacy-title")}
           </h1>
           <p className="text-white/50 text-lg">{t("privacy-effective-date")}</p>

@@ -210,19 +210,19 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden pt-20" style={{ marginTop: "-45px" }}>
+    <section className="relative min-h-screen flex items-center overflow-hidden pt-20 mt-0 lg:-mt-[45px]">
       {/* Ambient glow orbs */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl animate-float"></div>
       <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-orange-500/5 rounded-full blur-3xl animate-float" style={{ animationDelay: "2s" }}></div>
 
       <div className="container mx-auto px-6 max-w-7xl relative z-10">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           <div className="text-center lg:text-left animate-fade-up">
             <span className="inline-block px-4 py-1.5 rounded-full bg-gradient-to-r from-orange-500/20 to-orange-400/20 text-sm font-semibold uppercase tracking-wide mb-6">
               <span className="gradient-text">{t('hero-badge')}</span>
             </span>
             {/* dangerouslySetInnerHTML renders trusted translation strings only (not user input) for <brand> tag styling */}
-            <h1 className="text-5xl lg:text-7xl font-extrabold leading-tight text-white mb-6" dangerouslySetInnerHTML={{ __html: t('hero-title') }}>
+            <h1 className="text-3xl sm:text-5xl lg:text-7xl font-extrabold leading-tight text-white mb-6" dangerouslySetInnerHTML={{ __html: t('hero-title') }}>
             </h1>
             <p className="text-lg md:text-xl text-white/60 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
               {t('hero-subtitle')}
@@ -251,11 +251,11 @@ export default function Hero() {
                   </div>
                   <span className="text-xs text-white/40">{isConnected ? t('chat-status') : (lang === 'fr' ? "Hors ligne" : "Offline")}</span>
                 </div>
-                <div className="h-80 overflow-y-auto p-4 space-y-4 bg-base/30" id="chat-demo">
+                <div className="h-64 sm:h-80 overflow-y-auto p-4 space-y-4 bg-base/30" id="chat-demo">
                   {messages.map((msg) => (
                     <div key={msg.id} className={`flex items-start gap-3 ${msg.from === "user" ? "justify-end" : ""}`}>
                       {msg.from === "bot" && (
-                        <img src="https://i.ibb.co/1YVxD2PT/LOGO-removebg-preview.png" alt="Gavion" className="w-8 h-8 rounded-full flex-shrink-0 object-cover mt-2" style={{ animation: 'spin 7s linear infinite', animationDirection: 'reverse' }} />
+                        <img src="/logo-chat.webp" alt="Gavion" className="w-8 h-8 rounded-full flex-shrink-0 object-cover mt-2" style={{ animation: 'spin 7s linear infinite', animationDirection: 'reverse' }} />
                       )}
                       <div className={`rounded-2xl p-3 max-w-[85%] text-sm leading-relaxed ${
                         msg.from === "bot"
@@ -271,7 +271,7 @@ export default function Hero() {
                   ))}
                   {isLoading && (
                     <div className="flex items-start gap-3">
-                      <img src="https://i.ibb.co/1YVxD2PT/LOGO-removebg-preview.png" alt="Gavion" className="w-8 h-8 rounded-full flex-shrink-0 object-cover mt-2" style={{ animation: 'spin 7s linear infinite', animationDirection: 'reverse' }} />
+                      <img src="/logo-chat.webp" alt="Gavion" className="w-8 h-8 rounded-full flex-shrink-0 object-cover mt-2" style={{ animation: 'spin 7s linear infinite', animationDirection: 'reverse' }} />
                       <div className="rounded-2xl p-3 bg-white/5 text-white rounded-tl-none">
                         <div className="flex gap-1">
                           <div className="w-2 h-2 bg-white/60 rounded-full animate-bounce" style={{ animationDelay: "0ms" }}></div>

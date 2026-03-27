@@ -54,7 +54,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           <button onClick={() => navigate('/')} className="relative group bg-transparent border-none cursor-pointer" aria-label="Gavion Home">
             <img
-              src="/GAVION_logo_transparent_4096w.png"
+              src="/GAVION_logo_transparent_4096w.webp"
               alt="Gavion"
               className="h-14 w-auto transition-transform group-hover:scale-105"
             />
@@ -101,11 +101,11 @@ export default function Navbar() {
             </button>
 
             <button
-              className="md:hidden text-white bg-transparent border-none cursor-pointer"
+              className="md:hidden text-white bg-transparent border-none cursor-pointer p-2"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle menu"
             >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
           </div>
         </div>

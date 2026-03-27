@@ -34,7 +34,7 @@ export default function Contact() {
   return (
     <section id="contact" className="py-24">
       <div className="container mx-auto px-6 max-w-7xl">
-        <div className="grid lg:grid-cols-2 gap-16 max-w-6xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 max-w-6xl mx-auto">
           {/* Left — Info */}
           <div className="reveal">
             <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-4">{t('contact-title')}</h2>
@@ -75,7 +75,7 @@ export default function Contact() {
               </div>
             )}
 
-            <form onSubmit={handleSubmit} className="bg-surface/60 backdrop-blur-sm rounded-2xl p-8 border border-white/5">
+            <form onSubmit={handleSubmit} className="bg-surface/60 backdrop-blur-sm rounded-2xl p-5 sm:p-8 border border-white/5">
               <div className="grid md:grid-cols-2 gap-6 mb-6">
                 <div>
                   <label className="block text-sm font-medium text-white/50 mb-2">{t('contact-form-name')}</label>

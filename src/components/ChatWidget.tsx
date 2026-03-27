@@ -266,7 +266,7 @@ export default function ChatWidget() {
             {messages.map((msg) => (
               <div key={msg.id} className={`flex items-start gap-2 ${msg.from === 'user' ? 'justify-end' : ''}`}>
                 {msg.from === 'bot' && (
-                  <img src="/logo-chat.png" alt="Gavion" className="w-8 h-8 rounded-full flex-shrink-0 object-cover mt-1" style={{ animation: 'spin 7s linear infinite', animationDirection: 'reverse' }} />
+                  <img src="/logo-chat.webp" alt="Gavion" className="w-8 h-8 rounded-full flex-shrink-0 object-cover mt-1" style={{ animation: 'spin 7s linear infinite', animationDirection: 'reverse' }} />
                 )}
                 <div className={`rounded-2xl px-3 py-2 max-w-[80%] text-sm ${
                   msg.from === 'bot'
@@ -284,7 +284,7 @@ export default function ChatWidget() {
             ))}
             {isLoading && (
               <div className="flex items-start gap-2">
-                <img src="/logo-chat.png" alt="Gavion" className="w-8 h-8 rounded-full flex-shrink-0 object-cover mt-1" style={{ animation: 'spin 7s linear infinite', animationDirection: 'reverse' }} />
+                <img src="/logo-chat.webp" alt="Gavion" className="w-8 h-8 rounded-full flex-shrink-0 object-cover mt-1" style={{ animation: 'spin 7s linear infinite', animationDirection: 'reverse' }} />
                 <div className="rounded-2xl p-3 bg-white/5 text-white rounded-tl-none">
                   <div className="flex gap-1">
                     <div className="w-2 h-2 bg-white/60 rounded-full animate-bounce" style={{ animationDelay: "0ms" }}></div>
